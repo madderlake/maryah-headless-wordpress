@@ -1,12 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import { Container } from 'reactstrap';
-import ContentBlock from '../../utilities/ContentBlock';
+import ContentBlock from '../../layout/ContentBlock/ContentBlock';
 import './index.css';
 
-const Home = (props) => {
-  if (props.data) {
-    const data = props.data;
-
+const Home = (data: any) => {
+  if (!data) return;
+  {
     return (
       <div>
         <Container>
@@ -18,8 +17,6 @@ const Home = (props) => {
       </div>
     );
   }
-
-  return null;
 };
 
 export default Home;

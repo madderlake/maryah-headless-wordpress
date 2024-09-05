@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
-import ContentBlock from '../../utilities/ContentBlock';
+import ContentBlock from '../ContentBlock/ContentBlock';
 import type { SectionProps, TabProps } from '../../types';
 import './tabset.css';
 

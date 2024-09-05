@@ -1,7 +1,7 @@
 import React from 'react';
 //import classNames from 'classnames';
 import { Row, Col, Container } from 'reactstrap';
-import ContentBlock from '../../utilities/ContentBlock';
+import ContentBlock from '../ContentBlock/ContentBlock';
 import { Section } from '../Section/Section';
 import './columns.css';
 

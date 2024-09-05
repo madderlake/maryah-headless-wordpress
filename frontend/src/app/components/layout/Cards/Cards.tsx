@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
+import type { SectionProps, FlexCardsLayout } from '../../types';
 import './cards.css';
 import {
   Card,
@@ -10,35 +11,35 @@ import {
   CardFooter,
   CardGroup,
   Button,
-  Col
+  Col,
 } from 'reactstrap';
 
-const Cardset = props => {
-  const { section } = props;
-  const cardList = props.card;
-  const cardWDesktop = 12 / props.columns.desktop;
-  const cardWTablet = 12 / props.columns.tablet;
-  const cardWPhone = 12 / props.columns.phone;
+const Cardset = (cards: FlexCardsLayout, section: SectionProps) => {
+  const cardColumns = cards.card_columns;
 
-  const getCards = cardList.map((card, index) => {
+  const cardWDesktop = 12 / cardColumns.desktop;
+  const cardWTablet = 12 / cardColumns.tablet;
+  const cardWPhone = 12 / cardColumns.phone;
+  const cardArray = cards.card;
+
+  const Cards = cardArray.map((card, index) => {
     return (
       <Col
         key={`card-${index}`}
         sm={cardWPhone}
         md={cardWTablet}
         lg={cardWDesktop}
-        className={classnames('card-col')}
-      >
-        <Card className={classnames(props.className, `h-100`, `shadow-sm`)}>
-          <CardImg src={card.image.url} />
+        className={classnames('card-col')}>
+        <Card className="h-100 shadow-sm">
+          <CardImg src={card.image} />
           <CardBody>
             <CardTitle tag={`h4`}>{card.card_title} </CardTitle>
             <p className="card-text"> {card.card_content} </p>
           </CardBody>
           <CardFooter>
             <Button
-              onClick={() => (window.location.href = card.button.button_link)}
-            >
+              //Fix
+              onClick={() => (window.location.href = card.button.button_link)}>
               {card.button.button_text}
             </Button>
           </CardFooter>
@@ -48,8 +49,8 @@ const Cardset = props => {
   });
 
   return (
-    <Section className={`card-set ${section.section_class}`} section={section}>
-      <CardGroup>{getCards}</CardGroup>
+    <Section {...section}>
+      <CardGroup>{Cards}</CardGroup>
     </Section>
   );
 };

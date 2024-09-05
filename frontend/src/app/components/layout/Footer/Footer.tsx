@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 
 import './index.css';
 
-const Footer = props => {
+const Footer = () => {
   return (
     <footer className="footer">
       <Container className="text-center py-5">
