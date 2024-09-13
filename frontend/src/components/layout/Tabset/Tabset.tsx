@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   TabContent,
   TabPane,
@@ -7,25 +7,23 @@ import {
   NavLink,
   Card,
   CardBody,
-  CardHeader
+  CardHeader,
 } from 'reactstrap';
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
-import ContentBlock from '../../utilities/ContentBlock';
+import ContentBlock from '../ContentBlock/ContentBlock';
+import type { SectionProps, TabProps } from '../../types';
 import './tabset.css';
 
-const Tabset = props => {
+const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
   const [activeTab, setActiveTab] = useState(0);
-  const toggle = tab => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
+  const toggle = (index: number) => {
+    if (activeTab !== index) {
+      setActiveTab(index);
     }
   };
 
-  const section = props.section;
-  const tabList = props.tab;
-
-  const getTabs = tabList.map((tab, index) => {
+  const Tabs = tabs.map((tab, index) => {
     return (
       <NavItem key={index}>
         <NavLink
@@ -33,16 +31,15 @@ const Tabset = props => {
             toggle(index);
           }}
           className={classnames({
-            active: activeTab === index
-          })}
-        >
+            active: activeTab === index,
+          })}>
           {tab.tab_title}
         </NavLink>
       </NavItem>
     );
   });
 
-  const getTabPanes = tabList.map((tab, index) => {
+  const TabPanes = tabs.map((tab, index) => {
     return (
       <TabPane tabId={index} key={`tab-${index}`}>
         <Card>
@@ -52,9 +49,8 @@ const Tabset = props => {
                 toggle(index);
               }}
               className={classnames({
-                active: activeTab === index
-              })}
-            >
+                active: activeTab === index,
+              })}>
               {tab.tab_title}
             </NavLink>
           </CardHeader>
@@ -68,9 +64,9 @@ const Tabset = props => {
     );
   });
   return (
-    <Section className={section.section_class} section={section}>
-      <Nav tabs>{getTabs}</Nav>
-      <TabContent activeTab={activeTab}>{getTabPanes}</TabContent>
+    <Section {...section}>
+      <Nav tabs>{Tabs}</Nav>
+      <TabContent activeTab={activeTab}>{TabPanes}</TabContent>
     </Section>
   );
 };

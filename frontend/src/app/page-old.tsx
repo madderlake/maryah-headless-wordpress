@@ -1,7 +1,7 @@
 // app/page.tsx
 import { gql } from '@apollo/client';
 import { client } from './lib/apolloClient';
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify, { sanitize } from 'isomorphic-dompurify';
 
 export const revalidate = 10; // ISR (Incremental Static Regeneration)
 
