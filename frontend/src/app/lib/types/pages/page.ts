@@ -10,8 +10,11 @@ export type Page = {
   featuredImage?: Node<FeaturedImage>;
   tags?: Edges<Tag>;
   content?: string;
-  acf?: any[];
+  // acf?: any[];
   revisions?: Edges<Revision>;
+  template?: {
+    templateName: string;
+  };
 };
 
 export type PageBy = {

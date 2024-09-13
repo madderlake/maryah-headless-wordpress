@@ -1,9 +1,10 @@
 import fetchAPI from './fetchApi';
 import { Preview } from '@/types/posts/preview';
 import {
-  GET_ALL_PAGE_BY_SLUG,
+  GET_FLEX_PAGE_BY_SLUG,
   GET_PAGE_BY_SLUG,
   GET_PAGE_TEMPLATE,
+  GetPageBySlugResult,
 } from './queries/pages';
 
 import {
@@ -11,7 +12,6 @@ import {
   GET_ALL_POSTS_WITH_SLUG,
   GET_ALL_POSTS_FOR_HOME,
   GET_POST_AND_MORE_POSTS,
-  GetPageBySlugResult,
   GetPostAndMorePostsResult,
   GetAllPostsWithSlugResult,
   GetAllPostsForHomeResult,
@@ -23,7 +23,22 @@ export async function getPageBySlug(slug: string) {
     variables: { slug },
   });
 
-  return data.pageBy;
+  return data;
+}
+
+export async function getPageTemplateBySlug(slug: string) {
+  const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_TEMPLATE, {
+    variables: { slug },
+  });
+
+  return data;
+}
+export async function getFlexPageBySlug(slug: string) {
+  const data = await fetchAPI<GetPageBySlugResult>(GET_FLEX_PAGE_BY_SLUG, {
+    variables: { slug },
+  });
+
+  return data;
 }
 
 export async function getPreviewPost(

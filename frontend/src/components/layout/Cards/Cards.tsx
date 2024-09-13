@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
-import type { SectionProps, FlexCardsLayout } from '../../types';
+import type { SectionProps, FlexCardsLayout, CardProps } from '../../types';
 import './cards.css';
 import {
   Card,
@@ -14,15 +14,16 @@ import {
   Col,
 } from 'reactstrap';
 
-const Cardset = (cards: FlexCardsLayout, section: SectionProps) => {
-  const cardColumns = cards.card_columns;
+const Cardset = (props: FlexCardsLayout) => {
+  const { cards, section } = props;
+  const cardColumns = cards?.cardColumns;
+  // const { desktop, tablet, phone } = cardColumns;
 
-  const cardWDesktop = 12 / cardColumns.desktop;
-  const cardWTablet = 12 / cardColumns.tablet;
-  const cardWPhone = 12 / cardColumns.phone;
-  const cardArray = cards.card;
+  const cardWDesktop = 12 / cardColumns?.desktop;
+  const cardWTablet = 12 / cardColumns?.tablet;
+  const cardWPhone = 12 / cardColumns?.phone;
 
-  const Cards = cardArray.map((card, index) => {
+  const Cards = cards?.card.map((card: CardProps, index: number) => {
     return (
       <Col
         key={`card-${index}`}
@@ -33,14 +34,14 @@ const Cardset = (cards: FlexCardsLayout, section: SectionProps) => {
         <Card className="h-100 shadow-sm">
           <CardImg src={card.image} />
           <CardBody>
-            <CardTitle tag={`h4`}>{card.card_title} </CardTitle>
-            <p className="card-text"> {card.card_content} </p>
+            <CardTitle tag={`h4`}>{card.cardTitle} </CardTitle>
+            <p className="card-text"> {card.cardContent} </p>
           </CardBody>
           <CardFooter>
             <Button
               //Fix
-              onClick={() => (window.location.href = card.button.button_link)}>
-              {card.button.button_text}
+              onClick={() => (window.location.href = card.button.buttonLink)}>
+              {card.button.buttonText}
             </Button>
           </CardFooter>
         </Card>
@@ -50,7 +51,7 @@ const Cardset = (cards: FlexCardsLayout, section: SectionProps) => {
 
   return (
     <Section {...section}>
-      <CardGroup>{Cards}</CardGroup>
+      <div className="flex gap-10">{Cards}</div>
     </Section>
   );
 };
