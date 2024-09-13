@@ -1,4 +1,6 @@
-export const GET_ALL_PAGE_BY_SLUG = `
+import { Edges, QueryEdgesResult } from '@/types/common';
+import { type Page } from '@/types/pages/page';
+export const GET_FLEX_PAGE_BY_SLUG = `
   query GetFlexContent($slug: String!) {
   pageBy(uri: $slug) {
     id
@@ -15,19 +17,19 @@ export const GET_ALL_PAGE_BY_SLUG = `
       }
       flexContent {
         ... on FlexibleContentFlexContentSectionLayout {
-          fieldGroupName
           sectionM {
             ...FlexibleContentFlexContentSectionMFragment
           }
         }
         ... on FlexibleContentFlexContentTabSetLayout {
-          fieldGroupName
+          sectionM {
+            ...FlexibleContentFlexContentSectionMFragment
+          }
           tabs {
             ...FlexibleContentFlexContentTabsFragment
           }
         }
         ... on FlexibleContentFlexContentColumnsLayout {
-          fieldGroupName
           sectionM {
             ...FlexibleContentFlexContentSectionMFragment
           }
@@ -36,13 +38,117 @@ export const GET_ALL_PAGE_BY_SLUG = `
           }
         }
         ... on FlexibleContentFlexContentCardsLayout {
-          fieldGroupName
+          sectionM {
+            ...FlexibleContentFlexContentSectionMFragment
+          }
+          card {
+            ...FlexibleContentFlexContentCardFragment
+          }
         }
       }
     }
   }
 }
-  }`;
+
+fragment FlexibleContentFlexContentSectionMSectionTitleFragment on FlexibleContentFlexContentSectionMSectionTitle {
+  sectionTitle
+  sectionTitleClass
+  sectionTitleTag
+}
+
+fragment FlexibleContentFlexContentSectionMContentFragment on FlexibleContentFlexContentSectionMContent {
+  containerized
+  contentClass
+  sectionContent
+}
+
+fragment FlexibleContentFlexContentSectionMFragment on FlexibleContentFlexContentSectionM {
+  content {
+    ...FlexibleContentFlexContentSectionMContentFragment
+    containerized
+    contentClass
+    sectionContent
+  }
+  inGrid
+  sectionClass
+  sectionTitle {
+    ...FlexibleContentFlexContentSectionMSectionTitleFragment
+    sectionTitle
+    sectionTitleClass
+    sectionTitleTag
+  }
+}
+
+fragment FlexibleContentFlexContentTabsFragment on FlexibleContentFlexContentTabs {
+  tabContent
+  tabTitle
+}
+
+fragment FlexibleContentFlexContentColGroupFragment on FlexibleContentFlexContentColGroup {
+  fieldGroupName
+  column1 {
+    ... on FlexibleContentFlexContentColGroupColumn1ContentLayout {
+      class
+      content
+      width {
+        desktop
+        mobile
+        tablet
+      }
+    }
+  }
+  column2 {
+    ... on FlexibleContentFlexContentColGroupColumn2ContentLayout {
+      class
+      content
+      width {
+        desktop
+        mobile
+        tablet
+      }
+    }
+  }
+  column3 {
+    ... on FlexibleContentFlexContentColGroupColumn3ContentLayout {
+      class
+      content
+      width {
+        tablet
+        desktop
+        mobile
+      }
+    }
+  }
+  column4 {
+    ... on FlexibleContentFlexContentColGroupColumn4ContentLayout {
+      class
+      content
+      width {
+        tablet
+        mobile
+        fieldGroupName
+      }
+    }
+  }
+}
+
+fragment FlexibleContentFlexContentCardButtonFragment on FlexibleContentFlexContentCardButton {
+  buttonLink
+  buttonText
+}
+
+fragment FlexibleContentFlexContentCardFragment on FlexibleContentFlexContentCard {
+  cardContent
+  cardTitle
+  image {
+    node {
+      sourceUrl
+    }
+  }
+  button {
+    ...FlexibleContentFlexContentCardButtonFragment
+  }
+}`;
 
 export const GET_PAGE_BY_SLUG = `
   query GetPageBySlug($slug: String!) {
@@ -65,3 +171,5 @@ export const GET_PAGE_TEMPLATE = `
     }
   }
 }`;
+
+export type GetPageBySlugResult = QueryEdgesResult<'pageBy', Page>;

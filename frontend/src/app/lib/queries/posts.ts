@@ -6,8 +6,6 @@ import { Preview } from '@/types/posts/preview';
 
 export type GetPreviewPostResult = Preview;
 
-export type GetPageBySlugResult = QueryEdgesResult<'pageBy', Page>;
-
 export const GET_PREVIEW_POST = `
   query PreviewPost($id: ID!, $idType: PostIdType!) {
     post(id: $id, idType: $idType) {

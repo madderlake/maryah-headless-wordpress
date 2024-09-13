@@ -7,26 +7,26 @@ import type { SectionProps } from '../../types';
 import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {
-  const sectionTitle = section.section_title_group;
+  const sectionTitleGroup = section.sectionTitleGroup;
   const content = section.content;
-  const bgImg = section.bg_img;
+  const bgImg = section.bgImg;
   const bgImgClass = bgImg && 'bgImag';
 
   return (
     <section
-      className={classnames(section.section_class, bgImgClass)}
+      className={classnames(section.sectionClass, bgImgClass)}
       style={bgImg && { backgroundImage: `url(${bgImg.url})` }}>
       <Container
         fluid={!content.containerized}
-        className={section.content.content_class}>
+        className={section.content.contentClass}>
         <Title
-          title={sectionTitle.section_title}
-          titleClass={sectionTitle.section_title_class}
-          tag={sectionTitle.section_title_tag}
+          title={sectionTitleGroup.sectionTitle}
+          titleClass={sectionTitleGroup.sectionTitleClass}
+          tag={sectionTitleGroup.sectionTitleTag}
         />
         <ContentBlock
-          className={content.content_class}
-          content={content.section_content}
+          className={content.contentClass}
+          content={content.sectionContent}
         />
       </Container>
     </section>

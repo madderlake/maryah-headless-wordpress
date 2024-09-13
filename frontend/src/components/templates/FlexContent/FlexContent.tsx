@@ -1,21 +1,22 @@
 'use client';
-import { Section } from '../../layout/Section/Section';
-import Tabset from '../../layout/Tabset/Tabset';
-import Cardset from '../../layout/Cards/Cards';
-import Columns from '../../layout/Columns/Columns';
-import { SectionProps } from './types';
+import { Section } from '@/components/layout/Section/Section';
+import Tabset from '@/components/layout/Tabset/Tabset';
+import Cardset from '@/components/layout/Cards/Cards';
+import Columns from '@/components/layout/Columns/Columns';
+import { SectionProps, ACFLayout, TabProps } from '@/components/types';
 import './index.css';
+import { Page } from '@/types/pages/page';
 
-// type FlexData = {
-//   slug: string;
-//   acf: {
-//     page_title_group: {
-//       page_title: string;
-//       page_title_class: string;
-//     };
-//     flex_content: ACFLayout[];
-//   };
-// };
+type FlexData = {
+  slug: string;
+  flexibleContent: {
+    pageTitleGroup: {
+      pageTitle: string;
+      pageTitleClass: string;
+    };
+    flexContent: ACFLayout[];
+  };
+};
 
 // type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns' | string;
 
@@ -27,10 +28,6 @@ import './index.css';
 //   columns?: FlexColumnsLayout;
 // };
 
-// type TabProps = {
-//   tab_title: string;
-//   tab_content: string;
-// };
 // type CardProps = {
 //   card_title: string;
 //   image: string;
@@ -76,50 +73,42 @@ import './index.css';
 //     } | null;
 //   }
 // ];
-const FlexContent = (data: FlexData) => {
+const FlexContent = (data: Page & FlexData) => {
   if (!data) return;
-  const { acf, slug } = data;
-  const { flex_content, page_title_group } = acf;
-  const layouts = flex_content;
-  const pageTitle = page_title_group.page_title;
-  const pageTitleClass = page_title_group.page_title_class;
+  const { flexibleContent, slug } = data;
+  const { flexContent, pageTitleGroup } = flexibleContent;
+  const layouts = flexContent;
+  const pageTitle = pageTitleGroup.pageTitle;
+  const pageTitleClass = pageTitleGroup.pageTitleClass;
 
-  const getLayouts = layouts.map((layout: ACFLayout, index: number) => {
-    const fc_layout = layout.acf_fc_layout;
-    const { section_m, tab_set, cards, columns } = layout;
+  const Layouts = [...layouts].map((layout: ACFLayout) => {
+    const { sectionM, tabs, cards, columns } = layout;
 
     const tabsetProps = {
-      key: index,
-      section: section_m,
-      tab: tab_set,
-      // inGrid: section_m.in_grid,
+      section: sectionM,
+      tabs,
     };
 
     const cardsetProps = {
-      key: index,
-      section: section_m,
-      cards: cards,
-      //columns: cards?.card_columns,
+      section: sectionM,
+      cards,
+      columns: cards?.cardColumns,
     };
 
     const colProps = {
-      key: index,
-      section: section_m,
-      num_col: columns?.num_columns,
-      //containerized: layout.containerized,
-      columns: columns?.col_group,
+      section: sectionM,
+      numCol: columns?.numColumns,
+      columns: columns?.colGroup,
     };
-
-    switch (fc_layout) {
-      case 'tab_set':
-        return <Tabset {...tabsetProps} />;
-      case 'columns':
-        return <Columns {...colProps} />;
-      case 'cards':
-        return <Cardset {...cardsetProps} />;
-      default:
-        return <Section key={index} {...section_m} />;
-    }
+    return tabs ? (
+      <Tabset {...tabsetProps} />
+    ) : columns ? (
+      <Columns {...colProps} />
+    ) : cards ? (
+      <Cardset {...cardsetProps} />
+    ) : (
+      <Section {...sectionM} />
+    );
   });
 
   return (
@@ -127,7 +116,7 @@ const FlexContent = (data: FlexData) => {
       {pageTitle && (
         <h1 className={`container ${pageTitleClass}`}>{pageTitle}</h1>
       )}
-      {getLayouts}
+      {Layouts}
     </div>
   );
 };

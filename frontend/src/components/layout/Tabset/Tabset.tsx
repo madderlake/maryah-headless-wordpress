@@ -12,7 +12,7 @@ import {
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
 import ContentBlock from '../ContentBlock/ContentBlock';
-import type { SectionProps, TabProps } from '../../types';
+import type { SectionProps, TabProps } from '@/components/types';
 import './tabset.css';
 
 const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
@@ -33,7 +33,7 @@ const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
           className={classnames({
             active: activeTab === index,
           })}>
-          {tab.tab_title}
+          {tab.tabTitle}
         </NavLink>
       </NavItem>
     );
@@ -51,12 +51,12 @@ const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
               className={classnames({
                 active: activeTab === index,
               })}>
-              {tab.tab_title}
+              {tab.tabTitle}
             </NavLink>
           </CardHeader>
           {/* <Collapse isOpen={collapse}> */}
           <CardBody>
-            <ContentBlock content={tab.tab_content} />
+            <ContentBlock content={tab.tabContent} />
           </CardBody>
           {/* </Collapse> */}
         </Card>

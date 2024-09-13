@@ -1,43 +1,41 @@
 type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns';
 
 export type ACFLayout = {
-  acf_fc_layout: ACFLayoutType;
-  section_m: SectionProps;
+  //acf_fc_layout: ACFLayoutType;
+  sectionM: SectionProps;
   tabs: TabProps[];
   cards: FlexCardsLayout;
   columns?: FlexColumnsLayout;
 };
 export type SectionTitle = {
-  section_title: string;
-  section_title_tag: string;
-  section_title_class: string;
+  sectionTitle: string;
+  sectionTitleTag: string;
+  sectionTitleClass: string;
 };
 export type SectionProps = {
-  section_title_group: SectionTitle;
-  section_class: string;
-  bg_img: {
+  sectionTitleGroup: SectionTitle;
+  sectionClass: string;
+  bgImg: {
     url: string;
     alt: string;
     sizes: string[];
   };
   content: {
-    content_class: string;
+    contentClass: string;
     containerized: boolean; // Fix  - remove?
-    section_content: string;
+    sectionContent: string;
   };
   in_grid: boolean;
-  children: React.ReactNode;
-  className: string;
 };
 
 export type TabProps = {
-  tab_title: string;
-  tab_content: string;
+  tabTitle: string;
+  tabContent: string;
 };
 export type CardProps = {
-  card_title: string;
+  cardTitle: string;
   image: string;
-  card_content: string;
+  cardContent: string;
   button: {
     button_text: string;
     button_link: string;
@@ -45,7 +43,7 @@ export type CardProps = {
 };
 
 type FlexCardsLayout = {
-  card_columns: {
+  cardColumns: {
     desktop: number;
     tablet: number;
     phone: number;
@@ -54,13 +52,13 @@ type FlexCardsLayout = {
 };
 
 export type FlexColumnsLayout = {
-  num_columns: string;
-  col_group: {
+  numColumns: string;
+  colGroup: {
     [key: string]: ColProps[];
   };
 };
 export type ColProps = {
-  acf_fc_layout: string;
+  //acf_fc_layout: string;
   width: {
     desktop: string;
     tablet: string;
