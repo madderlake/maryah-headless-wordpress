@@ -12,11 +12,13 @@ import {
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
 import ContentBlock from '../ContentBlock/ContentBlock';
-import type { SectionProps, TabProps } from '@/components/types';
+import type { FlexTabsLayout } from '@/components/types';
 import './tabset.css';
 
-const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
+const Tabset = (props: FlexTabsLayout): JSX.Element => {
   const [activeTab, setActiveTab] = useState(0);
+
+  const { section, tabs } = props;
   const toggle = (index: number) => {
     if (activeTab !== index) {
       setActiveTab(index);
@@ -39,7 +41,7 @@ const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
     );
   });
 
-  const TabPanes = tabs.map((tab, index) => {
+  const TabPanels = tabs.map((tab, index) => {
     return (
       <TabPane tabId={index} key={`tab-${index}`}>
         <Card>
@@ -66,7 +68,7 @@ const Tabset = (tabs: TabProps[], section: SectionProps): JSX.Element => {
   return (
     <Section {...section}>
       <Nav tabs>{Tabs}</Nav>
-      <TabContent activeTab={activeTab}>{TabPanes}</TabContent>
+      <TabContent activeTab={activeTab}>{TabPanels}</TabContent>
     </Section>
   );
 };

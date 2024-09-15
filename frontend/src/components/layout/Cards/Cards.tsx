@@ -50,10 +50,9 @@ const Cardset = (props: FlexCardsLayout) => {
   });
 
   return (
-    <>
-      <Section {...section} />
-      <CardGroup>{Cards}</CardGroup>
-    </>
+    <Section {...section}>
+      <div className="flex gap-10">{Cards}</div>
+    </Section>
   );
 };
 

@@ -25,10 +25,9 @@ const Columns = (props: FlexColumnsLayout) => {
   });
 
   return (
-    <>
-      <Section {...section} />
+    <Section {...section}>
       <div className={`column-wrap flex gap-10`}>{allColumns}</div>
-    </>
+    </Section>
   );
 };
 

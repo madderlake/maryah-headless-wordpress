@@ -2,9 +2,9 @@ type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns';
 
 export type ACFLayout = {
   sectionM: SectionProps;
-  tabs: TabProps[];
+  tabs: FlexTabsLayout['tabs'];
   cards: FlexCardsLayout['cards'];
-  columns?: FlexColumnsLayout;
+  columns: FlexColumnsLayout['columns'];
 };
 export type SectionTitle = {
   sectionTitle: string;
@@ -25,6 +25,7 @@ export type SectionProps = {
     sectionContent: string;
   };
   inGrid: boolean;
+  children: React.ReactNode | string;
 };
 
 export type TabProps = {
@@ -40,7 +41,10 @@ export type CardProps = {
     buttonLink: string;
   };
 };
-
+type FlexTabsLayout = {
+  section: SectionProps;
+  tabs: TabProps[];
+};
 type FlexCardsLayout = {
   section: SectionProps;
   cards: {
@@ -55,16 +59,13 @@ type FlexCardsLayout = {
 
 export type FlexColumnsLayout = {
   section: SectionProps;
-  //numColumns: string;
-  // colGroup?: {
-  //   [key: string]: ColProps[];
-  // };
   columns: [
     {
-      column: ColProps[];
+      column: ColProps;
     }
   ];
 };
+
 export type ColProps = {
   width: {
     desktop: string;

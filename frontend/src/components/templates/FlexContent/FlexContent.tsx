@@ -24,20 +24,18 @@ const FlexContent = (data: Page & FlexData) => {
   const { flexContent, pageTitleGroup } = flexTemplate;
   const pageTitle = pageTitleGroup.pageTitle;
   const pageTitleClass = pageTitleGroup.pageTitleClass;
-  // console.log(flexContent);
 
   const Layouts = Object.values(flexContent).map(
     (layout: ACFLayout, index: number) => {
-      //console.log(layout);
       const { sectionM, tabs, cards, columns } = layout;
 
       const cardProps = { section: sectionM, cards };
       const columnProps = { section: sectionM, columns };
-
+      const tabProps = { section: sectionM, tabs };
       return tabs ? (
-        <Tabset key={index} {...sectionM} {...tabs} />
+        <Tabset key={index} {...tabProps} />
       ) : columns ? (
-        <Columns key={index} {...columnProps} />
+        <Columns {...columnProps} key={index} />
       ) : cards ? (
         <Cardset key={index} {...cardProps} />
       ) : sectionM ? (

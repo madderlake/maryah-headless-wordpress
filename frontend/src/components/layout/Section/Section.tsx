@@ -8,7 +8,7 @@ import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {
   const sectionGroup = section.sectionTitle;
-  const { content, bgImg } = section;
+  const { content, bgImg, children } = section;
   const bgImgClass = bgImg && 'bgImage';
 
   return (
@@ -26,6 +26,7 @@ const Section = ({ ...section }: SectionProps) => {
           content={content?.sectionContent}
         />
       </Container>
+      {children}
     </section>
   );
 };
