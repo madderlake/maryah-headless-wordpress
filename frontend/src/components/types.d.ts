@@ -54,10 +54,16 @@ type FlexCardsLayout = {
 };
 
 export type FlexColumnsLayout = {
-  numColumns: string;
-  colGroup: {
-    [key: string]: ColProps[];
-  };
+  section: SectionProps;
+  //numColumns: string;
+  // colGroup?: {
+  //   [key: string]: ColProps[];
+  // };
+  columns: [
+    {
+      column: ColProps[];
+    }
+  ];
 };
 export type ColProps = {
   width: {
@@ -67,4 +73,4 @@ export type ColProps = {
   };
   class: string;
   content: string;
-} | null;
+};

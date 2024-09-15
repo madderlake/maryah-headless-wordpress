@@ -10,7 +10,7 @@ const Section = ({ ...section }: SectionProps) => {
   const sectionGroup = section.sectionTitle;
   const { content, bgImg } = section;
   const bgImgClass = bgImg && 'bgImage';
-  // console.log({ ...section });
+
   return (
     <section
       className={classnames(section.sectionClass, bgImgClass, 'mb-16')}

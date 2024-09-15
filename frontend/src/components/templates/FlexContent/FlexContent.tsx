@@ -22,23 +22,22 @@ const FlexContent = (data: Page & FlexData) => {
   if (!data) return;
   const { flexTemplate, slug } = data;
   const { flexContent, pageTitleGroup } = flexTemplate;
-  // const layouts = flexContent;
   const pageTitle = pageTitleGroup.pageTitle;
   const pageTitleClass = pageTitleGroup.pageTitleClass;
-  console.log(flexContent);
+  // console.log(flexContent);
 
-  // const Layouts = [...layouts].map((layout: ACFLayout, index) => {
-  //   console.log('layouts', Object.values(layouts));
   const Layouts = Object.values(flexContent).map(
     (layout: ACFLayout, index: number) => {
+      //console.log(layout);
       const { sectionM, tabs, cards, columns } = layout;
 
       const cardProps = { section: sectionM, cards };
+      const columnProps = { section: sectionM, columns };
 
       return tabs ? (
         <Tabset key={index} {...sectionM} {...tabs} />
       ) : columns ? (
-        <Columns key={index} {...sectionM} {...columns} />
+        <Columns key={index} {...columnProps} />
       ) : cards ? (
         <Cardset key={index} {...cardProps} />
       ) : sectionM ? (
@@ -46,7 +45,6 @@ const FlexContent = (data: Page & FlexData) => {
       ) : null;
     }
   );
-  // });
 
   return (
     <div className={`${slug} `}>

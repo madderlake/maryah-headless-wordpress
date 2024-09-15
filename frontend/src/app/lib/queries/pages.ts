@@ -32,13 +32,19 @@ query GetFlexTemplate2($slug: String!) {
           sectionM {
             ...SectionMFragment
           }
-          colGroup {
-            ...ColGroupFragment
+          columns {
+            ...ColumnsFragment
           }
         }
         ... on FlexTemplateFlexContentSectionLayout {
           sectionM {
             ...SectionMFragment
+            content {
+              containerized
+              contentClass
+              fieldGroupName
+              sectionContent
+            }
           }
         }
       }
@@ -70,53 +76,6 @@ fragment TabsFragment on FlexTemplateFlexContentTabs {
   tabTitle
 }
 
-fragment ColGroupFragment on FlexTemplateFlexContentColGroup {
-  column1 {
-    ... on FlexTemplateFlexContentColGroupColumn1ContentLayout {
-      class
-      content
-      width {
-        desktop
-        mobile
-        tablet
-      }
-    }
-  }
-  column2 {
-    ... on FlexTemplateFlexContentColGroupColumn2ContentLayout {
-      class
-      content
-      width {
-        desktop
-        mobile
-        tablet
-      }
-    }
-  }
-  column3 {
-    ... on FlexTemplateFlexContentColGroupColumn3ContentLayout {
-      class
-      content
-      width {
-        desktop
-        mobile
-        tablet
-      }
-    }
-  }
-  column4 {
-    ... on FlexTemplateFlexContentColGroupColumn4ContentLayout {
-      class
-      content
-      width {
-        desktop
-        mobile
-        tablet
-      }
-    }
-  }
-}
-
 fragment CardsFragment on FlexTemplateFlexContentCards {
   card {
     cardContent
@@ -130,6 +89,20 @@ fragment CardsFragment on FlexTemplateFlexContentCards {
     desktop
     phone
     tablet
+  }
+}
+
+fragment ColumnsFragment on FlexTemplateFlexContentColumns {
+  column {
+    ... on FlexTemplateFlexContentColumnsColumnContentLayout {
+      class
+      content
+      width {
+        desktop
+        mobile
+        tablet
+      }
+    }
   }
 }`;
 /* ---------------------------------------------- */
