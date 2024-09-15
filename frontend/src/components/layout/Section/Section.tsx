@@ -2,31 +2,28 @@ import React from 'react';
 import classnames from 'classnames';
 import { Container } from 'reactstrap';
 import ContentBlock from '../ContentBlock/ContentBlock';
-import { DynamicTag } from '../../core/DynamicTag';
+import DynamicTag from '../../core/DynamicTag';
 import type { SectionProps } from '../../types';
 import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {
-  const sectionTitleGroup = section.sectionTitleGroup;
-  const content = section.content;
-  const bgImg = section.bgImg;
-  const bgImgClass = bgImg && 'bgImag';
-
+  const sectionGroup = section.sectionTitle;
+  const { content, bgImg } = section;
+  const bgImgClass = bgImg && 'bgImage';
+  // console.log({ ...section });
   return (
     <section
-      className={classnames(section.sectionClass, bgImgClass)}
+      className={classnames(section.sectionClass, bgImgClass, 'mb-16')}
       style={bgImg && { backgroundImage: `url(${bgImg.url})` }}>
-      <Container
-        fluid={!content.containerized}
-        className={section.content.contentClass}>
+      <Container fluid={!section.inGrid} className={content?.contentClass}>
         <Title
-          title={sectionTitleGroup.sectionTitle}
-          titleClass={sectionTitleGroup.sectionTitleClass}
-          tag={sectionTitleGroup.sectionTitleTag}
+          title={sectionGroup?.sectionTitle}
+          titleClass={sectionGroup?.sectionTitleClass}
+          tag={sectionGroup?.sectionTitleTag}
         />
         <ContentBlock
-          className={content.contentClass}
-          content={content.sectionContent}
+          className={content?.contentClass}
+          content={content?.sectionContent}
         />
       </Container>
     </section>

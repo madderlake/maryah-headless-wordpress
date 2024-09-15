@@ -1,70 +1,57 @@
 import { Edges, QueryEdgesResult } from '@/types/common';
 import { type Page } from '@/types/pages/page';
 export const GET_FLEX_PAGE_BY_SLUG = `
-  query GetFlexContent($slug: String!) {
+query GetFlexTemplate2($slug: String!) {
   pageBy(uri: $slug) {
     id
-    title
     content
-    slug
+    title
     template {
       templateName
     }
-    flexibleContent {
+    slug
+    flexTemplate {
+      flexContent {
+        ... on FlexTemplateFlexContentTabSetLayout {
+          sectionM {
+            ...SectionMFragment
+          }
+          tabs {
+            ...TabsFragment
+          }
+        }
+        ... on FlexTemplateFlexContentCardsLayout {
+          sectionM {
+            ...SectionMFragment
+          }
+          cards {
+            ...CardsFragment
+          }
+        }
+        ... on FlexTemplateFlexContentColumnsLayout {
+          sectionM {
+            ...SectionMFragment
+          }
+          colGroup {
+            ...ColGroupFragment
+          }
+        }
+        ... on FlexTemplateFlexContentSectionLayout {
+          sectionM {
+            ...SectionMFragment
+          }
+        }
+      }
       pageTitleGroup {
         pageTitle
         pageTitleClass
-      }
-      flexContent {
-        ... on FlexibleContentFlexContentSectionLayout {
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
-          }
-        }
-        ... on FlexibleContentFlexContentTabSetLayout {
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
-          }
-          tabs {
-            ...FlexibleContentFlexContentTabsFragment
-          }
-        }
-        ... on FlexibleContentFlexContentColumnsLayout {
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
-          }
-          colGroup {
-            ...FlexibleContentFlexContentColGroupFragment
-          }
-        }
-        ... on FlexibleContentFlexContentCardsLayout {
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
-          }
-          card {
-            ...FlexibleContentFlexContentCardFragment
-          }
-        }
       }
     }
   }
 }
 
-fragment FlexibleContentFlexContentSectionMSectionTitleFragment on FlexibleContentFlexContentSectionMSectionTitle {
-  sectionTitle
-  sectionTitleClass
-  sectionTitleTag
-}
-
-fragment FlexibleContentFlexContentSectionMContentFragment on FlexibleContentFlexContentSectionMContent {
-  containerized
-  contentClass
-  sectionContent
-}
-
-fragment FlexibleContentFlexContentSectionMFragment on FlexibleContentFlexContentSectionM {
+fragment SectionMFragment on FlexTemplateFlexContentSectionM {
   content {
-    ...FlexibleContentFlexContentSectionMContentFragment
     containerized
     contentClass
     sectionContent
@@ -72,22 +59,20 @@ fragment FlexibleContentFlexContentSectionMFragment on FlexibleContentFlexConten
   inGrid
   sectionClass
   sectionTitle {
-    ...FlexibleContentFlexContentSectionMSectionTitleFragment
     sectionTitle
     sectionTitleClass
     sectionTitleTag
   }
 }
 
-fragment FlexibleContentFlexContentTabsFragment on FlexibleContentFlexContentTabs {
+fragment TabsFragment on FlexTemplateFlexContentTabs {
   tabContent
   tabTitle
 }
 
-fragment FlexibleContentFlexContentColGroupFragment on FlexibleContentFlexContentColGroup {
-  fieldGroupName
+fragment ColGroupFragment on FlexTemplateFlexContentColGroup {
   column1 {
-    ... on FlexibleContentFlexContentColGroupColumn1ContentLayout {
+    ... on FlexTemplateFlexContentColGroupColumn1ContentLayout {
       class
       content
       width {
@@ -98,7 +83,7 @@ fragment FlexibleContentFlexContentColGroupFragment on FlexibleContentFlexConten
     }
   }
   column2 {
-    ... on FlexibleContentFlexContentColGroupColumn2ContentLayout {
+    ... on FlexTemplateFlexContentColGroupColumn2ContentLayout {
       class
       content
       width {
@@ -109,47 +94,45 @@ fragment FlexibleContentFlexContentColGroupFragment on FlexibleContentFlexConten
     }
   }
   column3 {
-    ... on FlexibleContentFlexContentColGroupColumn3ContentLayout {
+    ... on FlexTemplateFlexContentColGroupColumn3ContentLayout {
       class
       content
       width {
-        tablet
         desktop
         mobile
+        tablet
       }
     }
   }
   column4 {
-    ... on FlexibleContentFlexContentColGroupColumn4ContentLayout {
+    ... on FlexTemplateFlexContentColGroupColumn4ContentLayout {
       class
       content
       width {
-        tablet
+        desktop
         mobile
-        fieldGroupName
+        tablet
       }
     }
   }
 }
 
-fragment FlexibleContentFlexContentCardButtonFragment on FlexibleContentFlexContentCardButton {
-  buttonLink
-  buttonText
-}
-
-fragment FlexibleContentFlexContentCardFragment on FlexibleContentFlexContentCard {
-  cardContent
-  cardTitle
-  image {
-    node {
-      sourceUrl
+fragment CardsFragment on FlexTemplateFlexContentCards {
+  card {
+    cardContent
+    cardTitle
+    button {
+      buttonLink
+      buttonText
     }
   }
-  button {
-    ...FlexibleContentFlexContentCardButtonFragment
+  cardColumns {
+    desktop
+    phone
+    tablet
   }
 }`;
-
+/* ---------------------------------------------- */
 export const GET_PAGE_BY_SLUG = `
   query GetPageBySlug($slug: String!) {
   pageBy(uri: $slug) {

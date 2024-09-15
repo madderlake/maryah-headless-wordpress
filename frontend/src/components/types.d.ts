@@ -1,10 +1,9 @@
 type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns';
 
 export type ACFLayout = {
-  //acf_fc_layout: ACFLayoutType;
   sectionM: SectionProps;
   tabs: TabProps[];
-  cards: FlexCardsLayout;
+  cards: FlexCardsLayout['cards'];
   columns?: FlexColumnsLayout;
 };
 export type SectionTitle = {
@@ -13,7 +12,7 @@ export type SectionTitle = {
   sectionTitleClass: string;
 };
 export type SectionProps = {
-  sectionTitleGroup: SectionTitle;
+  sectionTitle: SectionTitle;
   sectionClass: string;
   bgImg: {
     url: string;
@@ -25,7 +24,7 @@ export type SectionProps = {
     containerized: boolean; // Fix  - remove?
     sectionContent: string;
   };
-  in_grid: boolean;
+  inGrid: boolean;
 };
 
 export type TabProps = {
@@ -37,18 +36,21 @@ export type CardProps = {
   image: string;
   cardContent: string;
   button: {
-    button_text: string;
-    button_link: string;
+    buttonText: string;
+    buttonLink: string;
   };
 };
 
 type FlexCardsLayout = {
-  cardColumns: {
-    desktop: number;
-    tablet: number;
-    phone: number;
+  section: SectionProps;
+  cards: {
+    cardColumns: {
+      desktop: number;
+      tablet: number;
+      phone: number;
+    };
+    card: CardProps[];
   };
-  card: CardProps[];
 };
 
 export type FlexColumnsLayout = {
@@ -58,7 +60,6 @@ export type FlexColumnsLayout = {
   };
 };
 export type ColProps = {
-  //acf_fc_layout: string;
   width: {
     desktop: string;
     tablet: string;

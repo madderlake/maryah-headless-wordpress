@@ -1,10 +1,18 @@
+import React from 'react';
+
 type DynamicTagProps = {
   tag: string;
-  children: React.ReactNode;
+  children: React.ReactNode | string;
   className: string;
 };
 
-export const DynamicTag = ({ tag, children, ...rest }: DynamicTagProps) => {
-  const Tag = tag as keyof JSX.IntrinsicElements;
-  return <Tag {...rest}>{children}</Tag>;
+const DynamicTag = ({
+  tag = 'h2',
+  children,
+  className,
+}: DynamicTagProps): JSX.Element => {
+  const Tag = tag && (tag.toString() as keyof JSX.IntrinsicAttributes);
+  return React.createElement(Tag, { className }, children);
 };
+
+export default DynamicTag;
