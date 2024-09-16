@@ -1,58 +1,65 @@
-import { Edges, QueryEdgesResult } from '@/types/common';
+import { QueryEdgesResult } from '@/types/common';
 import { type Page } from '@/types/pages/page';
+
 export const GET_FLEX_PAGE_BY_SLUG = `
-query GetFlexTemplate2($slug: String!) {
-  pageBy(uri: $slug) {
-    id
-    content
-    title
-    template {
-      templateName
-    }
-    slug
-    flexTemplate {
-      flexContent {
-        ... on FlexTemplateFlexContentTabSetLayout {
-          sectionM {
-            ...SectionMFragment
-          }
-          tabs {
-            ...TabsFragment
-          }
+query FlexPageByUri($slug: String!) {
+  nodeByUri(uri: $slug) {
+    __typename
+    ... on Page {
+      ...PageData
+      flexTemplate {
+        pageTitleGroup {
+          ...PageTitleGroupFragment
         }
-        ... on FlexTemplateFlexContentCardsLayout {
-          sectionM {
-            ...SectionMFragment
+        flexContent {
+          ... on FlexTemplateFlexContentSectionLayout {
+            sectionM {
+              ...SectionMFragment
+            }
           }
-          cards {
-            ...CardsFragment
+          ... on FlexTemplateFlexContentTabSetLayout {
+            sectionM {
+              ...SectionMFragment
+            }
+            tabs {
+              tabContent
+              tabTitle
+            }
           }
-        }
-        ... on FlexTemplateFlexContentColumnsLayout {
-          sectionM {
-            ...SectionMFragment
+          ... on FlexTemplateFlexContentCardsLayout {
+            sectionM {
+              ...SectionMFragment
+            }
+            cards {
+              card {
+                ...CardFragment
+              }
+              cardColumns {
+                ...CardColumnsFragment
+              }
+            }
           }
-          columns {
-            ...ColumnsFragment
-          }
-        }
-        ... on FlexTemplateFlexContentSectionLayout {
-          sectionM {
-            ...SectionMFragment
-            content {
-              containerized
-              contentClass
-              fieldGroupName
-              sectionContent
+          ... on FlexTemplateFlexContentColumnsLayout {
+            sectionM {
+              ...SectionMFragment
+            }
+            columns {
+              ...ColumnsFragment
             }
           }
         }
       }
-      pageTitleGroup {
-        pageTitle
-        pageTitleClass
-      }
     }
+  }
+}
+
+fragment PageData on Page {
+  id
+  slug
+  title
+  content
+  template {
+    templateName
   }
 }
 
@@ -64,6 +71,11 @@ fragment SectionMFragment on FlexTemplateFlexContentSectionM {
   }
   inGrid
   sectionClass
+  bgImg {
+    node {
+      sourceUrl
+    }
+  }
   sectionTitle {
     sectionTitle
     sectionTitleClass
@@ -71,25 +83,19 @@ fragment SectionMFragment on FlexTemplateFlexContentSectionM {
   }
 }
 
-fragment TabsFragment on FlexTemplateFlexContentTabs {
-  tabContent
-  tabTitle
+fragment CardFragment on FlexTemplateFlexContentCardsCard {
+  button {
+    buttonLink
+    buttonText
+  }
+  cardContent
+  cardTitle
 }
 
-fragment CardsFragment on FlexTemplateFlexContentCards {
-  card {
-    cardContent
-    cardTitle
-    button {
-      buttonLink
-      buttonText
-    }
-  }
-  cardColumns {
-    desktop
-    phone
-    tablet
-  }
+fragment CardColumnsFragment on FlexTemplateFlexContentCardsCardColumns {
+  desktop
+  phone
+  tablet
 }
 
 fragment ColumnsFragment on FlexTemplateFlexContentColumns {
@@ -104,18 +110,30 @@ fragment ColumnsFragment on FlexTemplateFlexContentColumns {
       }
     }
   }
-}`;
+}
+
+fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
+  pageTitle
+  pageTitleClass
+}
+`;
+
 /* ---------------------------------------------- */
 export const GET_PAGE_BY_SLUG = `
-  query GetPageBySlug($slug: String!) {
-  pageBy(uri: $slug) {
-    id
-    title
-    content
-    slug
-    template {
-     templateName
-    }
+  query PageNodeByUri($slug: String!) {
+  nodeByUri(uri: $slug) {
+    __typename
+    ...PageData
+  }
+}
+
+fragment PageData on Page {
+  id
+  slug
+  title
+  content
+  template {
+    templateName
   }
 }`;
 
@@ -128,4 +146,4 @@ export const GET_PAGE_TEMPLATE = `
   }
 }`;
 
-export type GetPageBySlugResult = QueryEdgesResult<'pageBy', Page>;
+export type GetPageBySlugResult = QueryEdgesResult<'nodeByUri', Page>;

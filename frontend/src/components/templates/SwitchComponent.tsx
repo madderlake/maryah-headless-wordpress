@@ -16,14 +16,14 @@ const SwitchComponent = async ({ tmpl, slug }: SwitchProps) => {
       if (!pageData) {
         return notFound();
       }
-      return <Default {...pageData.pageBy} />;
+      return <Default {...pageData.nodeByUri} />;
 
     case 'Flex Content':
       pageData = await getFlexPageBySlug(slug);
       if (!pageData) {
         return notFound();
       }
-      return <FlexContent {...pageData.pageBy} />;
+      return <FlexContent {...pageData.nodeByUri} />;
 
     default:
       pageData = await getPageBySlug(slug);

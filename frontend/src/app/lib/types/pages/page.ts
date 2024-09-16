@@ -21,4 +21,8 @@ export type PageBy = {
   pageBy: Page;
 };
 
+export type NodeByUri = {
+  nodeByUri: Page;
+};
+
 // export default Page, {PageBy};
