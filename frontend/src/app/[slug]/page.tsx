@@ -1,37 +1,24 @@
-import { getPageBySlug } from '../lib/api';
+import { getPageBySlug } from '@/lib/api';
+import SwitchTemplate from '@/components/templates/SwitchTemplate';
 import { notFound } from 'next/navigation';
-import DOMPurify from 'isomorphic-dompurify';
-import type { Page } from '@/types/pages/page';
-import FlexContent from '@/components/templates/FlexContent/FlexContent';
-import Default from '@/components/templates/Default';
-export default async function Page({ params }: { params: { slug: string } }) {
-  const page: any = await getPageBySlug(params?.slug);
 
-  if (!page) {
-    return notFound();
-  }
+export default async function SinglePageOrPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data: any = await getPageBySlug(params?.slug);
+  if (!data) return notFound();
 
-  const { title, content, template } = page;
-  const { templateName } = template;
+  const { nodeByUri } = data;
+  const { slug } = params;
 
-  let TemplateComponent;
-
-  switch (templateName) {
-    case 'Flex Content':
-      TemplateComponent = FlexContent;
-      break;
-    default:
-      TemplateComponent = Default;
-  }
-
-  const saniContent = DOMPurify.sanitize(content);
+  const templateName =
+    nodeByUri.template !== null ? nodeByUri.template.templateName : null;
 
   return (
     <main className="min-h-screen p-24">
-      {/* <TemplateComponent> */}
-      <h1 className="text-xl font-bold mb-8">{title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: saniContent }}></div>
-      {/* </TemplateComponent> */}
+      <SwitchTemplate tmpl={templateName} slug={slug} />
     </main>
   );
 }

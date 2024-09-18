@@ -83,7 +83,7 @@ export const fetchAPI = async <T extends {}>(
   if (json.errors) {
     throw new Error('Failed to fetch API');
   }
-  console.log('json', json);
+
   return json.data as T;
 };
 

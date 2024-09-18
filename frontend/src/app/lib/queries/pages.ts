@@ -1,67 +1,138 @@
-export const GET_ALL_PAGE_BY_SLUG = `
-  query GetFlexContent($slug: String!) {
-  pageBy(uri: $slug) {
-    id
-    title
-    content
-    slug
-    template {
-      templateName
-    }
-    flexibleContent {
-      pageTitleGroup {
-        pageTitle
-        pageTitleClass
-      }
-      flexContent {
-        ... on FlexibleContentFlexContentSectionLayout {
-          fieldGroupName
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
+import { QueryResult } from '@/types/common';
+import { type Page } from '@/types/pages/page';
+
+export const GET_PAGE_BY_URI = `
+query PageByUri($slug: String!) {
+  nodeByUri(uri: $slug) {
+    __typename
+    ... on Page {
+      ...PageData
+      template {
+        templateName
+        ... on Template_FlexContent {
+          templateName
+          flexTemplate {
+            pageTitleGroup {
+              ...PageTitleGroupFragment
+            }
+            flexContent {
+              ... on FlexTemplateFlexContentSectionLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+              }
+              ... on FlexTemplateFlexContentTabSetLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                tabs {
+                  tabTitle
+                  tabContent
+                }
+              }
+              ... on FlexTemplateFlexContentCardsLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                cards {
+                  card {
+                    ...CardFragment
+                  }
+                  cardColumns {
+                    ...CardColumnsFragment
+                  }
+                }
+              }
+              ... on FlexTemplateFlexContentColumnsLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                columns {
+                  ...ColumnsFragment
+                }
+              }
+            }
           }
-        }
-        ... on FlexibleContentFlexContentTabSetLayout {
-          fieldGroupName
-          tabs {
-            ...FlexibleContentFlexContentTabsFragment
-          }
-        }
-        ... on FlexibleContentFlexContentColumnsLayout {
-          fieldGroupName
-          sectionM {
-            ...FlexibleContentFlexContentSectionMFragment
-          }
-          colGroup {
-            ...FlexibleContentFlexContentColGroupFragment
-          }
-        }
-        ... on FlexibleContentFlexContentCardsLayout {
-          fieldGroupName
         }
       }
     }
   }
 }
-  }`;
 
-export const GET_PAGE_BY_SLUG = `
-  query GetPageBySlug($slug: String!) {
-  pageBy(uri: $slug) {
-    id
-    title
-    content
-    slug
-    template {
-     templateName
+fragment PageData on Page {
+  id
+  slug
+  title
+  content
+}
+
+fragment SectionFragment on FlexTemplateFlexContentSectionM {
+  content {
+    containerized
+    contentClass
+    sectionContent
+  }
+  inGrid
+  sectionClass
+  bgImg {
+    node {
+      sourceUrl
     }
   }
-}`;
+  sectionTitle {
+    sectionTitle
+    sectionTitleClass
+    sectionTitleTag
+  }
+}
+
+fragment CardFragment on FlexTemplateFlexContentCardsCard {
+  button {
+    buttonLink
+    buttonText
+  }
+  cardContent
+  cardTitle
+}
+
+fragment CardColumnsFragment on FlexTemplateFlexContentCardsCardColumns {
+  desktop
+  phone
+  tablet
+}
+
+fragment ColumnsFragment on FlexTemplateFlexContentColumns {
+  column {
+    ... on FlexTemplateFlexContentColumnsColumnContentLayout {
+      class
+      content
+      width {
+        desktop
+        mobile
+        tablet
+      }
+    }
+  }
+}
+
+fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
+  pageTitle
+  pageTitleClass
+}
+`;
+
+/* ---------------------------------------------- */
 
 export const GET_PAGE_TEMPLATE = `
   query GetPageTemplateBySlug($slug: String!) {
-  pageBy(uri: $slug) {
+  nodeByUri(uri: $slug) {
+  __typename
+   ... on Page {
     template {
       templateName
     }
   }
+}
 }`;
+
+export type GetPageBySlugResult = QueryResult<'nodeByUri', Page>;

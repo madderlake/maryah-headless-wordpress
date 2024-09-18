@@ -1,34 +1,32 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Container } from 'reactstrap';
-import ContentBlock from '../ContentBlock/ContentBlock';
-import { DynamicTag } from '../../core/DynamicTag';
-import type { SectionProps } from '../../types';
+import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
+import DynamicTag from '@/components/core/DynamicTag';
+import type { SectionProps } from '@/components/templates/FlexContent/types';
 import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {
-  const sectionTitle = section.section_title_group;
-  const content = section.content;
-  const bgImg = section.bg_img;
-  const bgImgClass = bgImg && 'bgImag';
+  const sectionGroup = section.sectionTitle;
+  const { content, bgImg, children } = section;
+  const bgImgClass = bgImg && 'bgImage';
 
   return (
     <section
-      className={classnames(section.section_class, bgImgClass)}
+      className={classnames(section.sectionClass, bgImgClass, 'mb-16')}
       style={bgImg && { backgroundImage: `url(${bgImg.url})` }}>
-      <Container
-        fluid={!content.containerized}
-        className={section.content.content_class}>
+      <Container fluid={!section.inGrid} className={content?.contentClass}>
         <Title
-          title={sectionTitle.section_title}
-          titleClass={sectionTitle.section_title_class}
-          tag={sectionTitle.section_title_tag}
+          title={sectionGroup?.sectionTitle}
+          titleClass={sectionGroup?.sectionTitleClass}
+          tag={sectionGroup?.sectionTitleTag}
         />
         <ContentBlock
-          className={content.content_class}
-          content={content.section_content}
+          className={content?.contentClass}
+          content={content?.sectionContent}
         />
       </Container>
+      {children}
     </section>
   );
 };

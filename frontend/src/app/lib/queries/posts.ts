@@ -1,13 +1,41 @@
-import Post from '@/types/posts/post';
-import { Page, PageBy } from '@/types/pages/page';
+import type { Post } from '@/types/posts/post';
 
 import { Edges, QueryEdgesResult } from '@/types/common';
 import { Preview } from '@/types/posts/preview';
 
 export type GetPreviewPostResult = Preview;
 
-export type GetPageBySlugResult = QueryEdgesResult<'pageBy', Page>;
-
+export const GET_POST_BY_SLUG = `query GetNodeByUri($slug: String!) {
+  nodeByUri(uri: $slug) {
+    __typename
+  ... on Post {
+      id
+      date
+      slug
+      title
+      content
+      excerpt
+      author {
+        node {
+          name
+          avatar {
+            url
+          }
+          posts {
+            edges {
+              node {
+                title
+                link
+                date
+                excerpt
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
 export const GET_PREVIEW_POST = `
   query PreviewPost($id: ID!, $idType: PostIdType!) {
     post(id: $id, idType: $idType) {
@@ -32,34 +60,46 @@ export const GET_ALL_POSTS_WITH_SLUG = `
 
 export type GetAllPostsForHomeResult = QueryEdgesResult<'posts', Post>;
 
-export const GET_ALL_POSTS_FOR_HOME = `
-  query AllPosts {
-    posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
-      edges {
-        node {
-          title
-          excerpt
-          slug
-          date
-          featuredImage {
-            node {
-              sourceUrl
-            }
-          }
-          author {
-            node {
-              name
-              firstName
-              lastName
-              avatar {
-                url
-              }
-            }
-          }
+export const GET_LTD_POSTS = `
+  query AllPosts($limit: Int!) {
+  posts(first: $limit) {
+    edges {
+      ...RootQueryToPostConnectionEdgeFragment
+    }
+  }
+}
+
+fragment RootQueryToPostConnectionEdgeFragment on RootQueryToPostConnectionEdge {
+  node {
+    id
+    title
+    excerpt(format: RENDERED)
+    slug
+    date
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+    categories {
+      nodes {
+        categoryId
+        name
+        slug
+      }
+    }
+    author {
+      node {
+        id
+        name
+        avatar {
+          url
+          default
         }
       }
     }
-  }`;
+  }
+}`;
 
 export type GetPostAndMorePostsResult = {
   post: Post;

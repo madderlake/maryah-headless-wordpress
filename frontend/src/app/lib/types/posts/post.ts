@@ -1,21 +1,23 @@
 import { Edges, Node } from '../common';
+
+import Author from './author';
+import Category from './category';
 import FeaturedImage from './featuredImage';
 import Revision from './revision';
 import Tag from './tag';
 
-export type Page = {
+export type Post = {
+  id: string;
   title: string;
   excerpt: string;
   slug: string;
-  featuredImage?: Node<FeaturedImage>;
+  date: string;
+  featuredImage: Node<FeaturedImage>;
+  author: Node<Author>;
+  categories?: Edges<Category>;
   tags?: Edges<Tag>;
   content?: string;
-  acf?: any[];
   revisions?: Edges<Revision>;
 };
 
-export type PageBy = {
-  pageBy: Page;
-};
-
-// export default Page, {PageBy};
+// export default Post;
