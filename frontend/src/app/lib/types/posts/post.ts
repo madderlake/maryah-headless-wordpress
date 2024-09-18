@@ -6,7 +6,8 @@ import FeaturedImage from './featuredImage';
 import Revision from './revision';
 import Tag from './tag';
 
-type Post = {
+export type Post = {
+  id: string;
   title: string;
   excerpt: string;
   slug: string;
@@ -19,4 +20,4 @@ type Post = {
   revisions?: Edges<Revision>;
 };
 
-export default Post;
+// export default Post;

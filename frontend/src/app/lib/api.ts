@@ -1,16 +1,17 @@
 import fetchAPI from './fetchApi';
 import { Preview } from '@/types/posts/preview';
+
 import {
-  GET_FLEX_PAGE_BY_SLUG,
-  GET_PAGE_BY_SLUG,
+  GET_PAGE_BY_URI,
   GET_PAGE_TEMPLATE,
   GetPageBySlugResult,
 } from './queries/pages';
 
 import {
+  GET_POST_BY_SLUG,
   GET_PREVIEW_POST,
   GET_ALL_POSTS_WITH_SLUG,
-  GET_ALL_POSTS_FOR_HOME,
+  GET_LTD_POSTS,
   GET_POST_AND_MORE_POSTS,
   GetPostAndMorePostsResult,
   GetAllPostsWithSlugResult,
@@ -19,22 +20,21 @@ import {
 } from './queries/posts';
 
 export async function getPageBySlug(slug: string) {
-  const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_BY_SLUG, {
+  const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_BY_URI, {
     variables: { slug },
   });
+  return data;
+}
 
+export async function getPostBySlug(slug: string) {
+  const data = await fetchAPI(GET_POST_BY_SLUG, {
+    variables: { slug },
+  });
   return data;
 }
 
 export async function getPageTemplateBySlug(slug: string) {
   const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_TEMPLATE, {
-    variables: { slug },
-  });
-
-  return data;
-}
-export async function getFlexPageBySlug(slug: string) {
-  const data = await fetchAPI<GetPageBySlugResult>(GET_FLEX_PAGE_BY_SLUG, {
     variables: { slug },
   });
 
@@ -60,16 +60,14 @@ export async function getAllPostsWithSlug() {
   return data.posts;
 }
 
-export async function getAllPostsForHome(preview: boolean) {
-  const data = await fetchAPI<GetAllPostsForHomeResult>(
-    GET_ALL_POSTS_FOR_HOME,
-    {
-      variables: {
-        onlyEnabled: !preview,
-        preview,
-      },
-    }
-  );
+export async function getAllPostsForHome(limit: number, preview: boolean) {
+  const data = await fetchAPI<GetAllPostsForHomeResult>(GET_LTD_POSTS, {
+    variables: {
+      limit,
+      onlyEnabled: !preview,
+      preview,
+    },
+  });
 
   return data.posts;
 }

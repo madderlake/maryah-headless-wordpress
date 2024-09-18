@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Container } from 'reactstrap';
-import ContentBlock from '../ContentBlock/ContentBlock';
-import DynamicTag from '../../core/DynamicTag';
-import type { SectionProps } from '../../types';
+import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
+import DynamicTag from '@/components/core/DynamicTag';
+import type { SectionProps } from '@/components/templates/FlexContent/types';
 import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {

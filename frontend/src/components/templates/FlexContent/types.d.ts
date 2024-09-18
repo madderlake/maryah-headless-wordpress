@@ -1,5 +1,13 @@
 type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns';
 
+export type FlexData = {
+  pageTitleGroup: {
+    pageTitle: string;
+    pageTitleClass: string;
+  };
+  flexContent: ACFLayout[];
+};
+
 export type ACFLayout = {
   sectionM: SectionProps;
   tabs: FlexTabsLayout['tabs'];

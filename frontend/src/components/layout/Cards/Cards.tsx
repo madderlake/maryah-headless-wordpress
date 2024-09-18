@@ -1,7 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
-import type { SectionProps, FlexCardsLayout, CardProps } from '../../types';
+import type {
+  SectionProps,
+  FlexCardsLayout,
+  CardProps,
+} from '@/components/templates/FlexContent/types';
 import './cards.css';
 import {
   Card,

@@ -1,16 +1,24 @@
-import { getPageTemplateBySlug } from '@/lib/api';
-import SwitchComponent from '@/components/templates/SwitchComponent';
+import { getPageBySlug } from '@/lib/api';
+import SwitchTemplate from '@/components/templates/SwitchTemplate';
+import { notFound } from 'next/navigation';
 
-import type { Page } from '@/types/pages/page';
+export default async function SinglePageOrPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data: any = await getPageBySlug(params?.slug);
+  if (!data) return notFound();
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const templateData: any = await getPageTemplateBySlug(params?.slug);
+  const { nodeByUri } = data;
+  const { slug } = params;
 
-  const templateName = templateData.pageBy.template.templateName;
+  const templateName =
+    nodeByUri.template !== null ? nodeByUri.template.templateName : null;
 
   return (
     <main className="min-h-screen p-24">
-      <SwitchComponent tmpl={templateName} slug={params?.slug} />
+      <SwitchTemplate tmpl={templateName} slug={slug} />
     </main>
   );
 }
