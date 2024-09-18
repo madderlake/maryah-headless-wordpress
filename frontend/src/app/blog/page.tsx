@@ -28,7 +28,7 @@ const Blog = async ({ slug = 'blog' }) => {
         } = post;
         const postCats = categories.nodes.map((cat: any) => cat.name);
         return (
-          <section className={`post-${id} excerpt`}>
+          <section className={`post-${id} excerpt`} key={id}>
             <h3 className="my-4 font-bold">{title}</h3>
             <ContentBlock content={excerpt} />
             <p className="mt-4">by {author.node.name}</p>
