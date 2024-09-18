@@ -3,46 +3,37 @@ import { Section } from '@/components/layout/Section/Section';
 import Tabset from '@/components/layout/Tabset/Tabset';
 import Cardset from '@/components/layout/Cards/Cards';
 import Columns from '@/components/layout/Columns/Columns';
-import { ACFLayout } from '@/components/types';
-import './index.css';
+import { ACFLayout } from './types';
 import { Page } from '@/types/pages/page';
+import './index.css';
 
-type FlexData = {
-  slug: string;
-  flexTemplate: {
-    pageTitleGroup: {
-      pageTitle: string;
-      pageTitleClass: string;
-    };
-    flexContent: ACFLayout[];
-  };
-};
-
-const FlexContent = (data: Page & FlexData) => {
+const FlexContent = (data: Page) => {
   if (!data) return;
-  const { flexTemplate, slug } = data;
-  const { flexContent, pageTitleGroup } = flexTemplate;
-  const pageTitle = pageTitleGroup.pageTitle;
-  const pageTitleClass = pageTitleGroup.pageTitleClass;
+  const { slug, template } = data;
 
-  const Layouts = Object.values(flexContent).map(
-    (layout: ACFLayout, index: number) => {
-      const { sectionM, tabs, cards, columns } = layout;
+  const flexTemplate = template?.flexTemplate;
 
-      const cardProps = { section: sectionM, cards };
-      const columnProps = { section: sectionM, columns };
-      const tabProps = { section: sectionM, tabs };
-      return tabs ? (
-        <Tabset key={index} {...tabProps} />
-      ) : columns ? (
-        <Columns {...columnProps} key={index} />
-      ) : cards ? (
-        <Cardset key={index} {...cardProps} />
-      ) : sectionM ? (
-        <Section key={index} {...sectionM} />
-      ) : null;
-    }
-  );
+  const pageTitleGroup = flexTemplate?.pageTitleGroup;
+  const pageTitle = pageTitleGroup?.pageTitle;
+  const pageTitleClass = pageTitleGroup?.pageTitleClass;
+  const flexContent = flexTemplate?.flexContent as ACFLayout[];
+
+  const Layouts = Object.values(flexContent).map((layout, index: number) => {
+    const { sectionM, tabs, cards, columns } = layout;
+
+    const cardProps = { section: sectionM, cards };
+    const columnProps = { section: sectionM, columns };
+    const tabProps = { section: sectionM, tabs };
+    return tabs ? (
+      <Tabset key={index} {...tabProps} />
+    ) : columns ? (
+      <Columns {...columnProps} key={index} />
+    ) : cards ? (
+      <Cardset key={index} {...cardProps} />
+    ) : sectionM ? (
+      <Section key={index} {...sectionM} />
+    ) : null;
+  });
 
   return (
     <div className={`${slug} `}>

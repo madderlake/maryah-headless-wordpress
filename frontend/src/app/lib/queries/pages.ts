@@ -1,50 +1,56 @@
-import { QueryEdgesResult } from '@/types/common';
+import { QueryResult } from '@/types/common';
 import { type Page } from '@/types/pages/page';
 
-export const GET_FLEX_PAGE_BY_SLUG = `
-query FlexPageByUri($slug: String!) {
+export const GET_PAGE_BY_URI = `
+query PageByUri($slug: String!) {
   nodeByUri(uri: $slug) {
     __typename
     ... on Page {
       ...PageData
-      flexTemplate {
-        pageTitleGroup {
-          ...PageTitleGroupFragment
-        }
-        flexContent {
-          ... on FlexTemplateFlexContentSectionLayout {
-            sectionM {
-              ...SectionMFragment
+      template {
+        templateName
+        ... on Template_FlexContent {
+          templateName
+          flexTemplate {
+            pageTitleGroup {
+              ...PageTitleGroupFragment
             }
-          }
-          ... on FlexTemplateFlexContentTabSetLayout {
-            sectionM {
-              ...SectionMFragment
-            }
-            tabs {
-              tabContent
-              tabTitle
-            }
-          }
-          ... on FlexTemplateFlexContentCardsLayout {
-            sectionM {
-              ...SectionMFragment
-            }
-            cards {
-              card {
-                ...CardFragment
+            flexContent {
+              ... on FlexTemplateFlexContentSectionLayout {
+                sectionM {
+                  ...SectionFragment
+                }
               }
-              cardColumns {
-                ...CardColumnsFragment
+              ... on FlexTemplateFlexContentTabSetLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                tabs {
+                  tabTitle
+                  tabContent
+                }
               }
-            }
-          }
-          ... on FlexTemplateFlexContentColumnsLayout {
-            sectionM {
-              ...SectionMFragment
-            }
-            columns {
-              ...ColumnsFragment
+              ... on FlexTemplateFlexContentCardsLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                cards {
+                  card {
+                    ...CardFragment
+                  }
+                  cardColumns {
+                    ...CardColumnsFragment
+                  }
+                }
+              }
+              ... on FlexTemplateFlexContentColumnsLayout {
+                sectionM {
+                  ...SectionFragment
+                }
+                columns {
+                  ...ColumnsFragment
+                }
+              }
             }
           }
         }
@@ -58,12 +64,9 @@ fragment PageData on Page {
   slug
   title
   content
-  template {
-    templateName
-  }
 }
 
-fragment SectionMFragment on FlexTemplateFlexContentSectionM {
+fragment SectionFragment on FlexTemplateFlexContentSectionM {
   content {
     containerized
     contentClass
@@ -119,31 +122,17 @@ fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
 `;
 
 /* ---------------------------------------------- */
-export const GET_PAGE_BY_SLUG = `
-  query PageNodeByUri($slug: String!) {
-  nodeByUri(uri: $slug) {
-    __typename
-    ...PageData
-  }
-}
-
-fragment PageData on Page {
-  id
-  slug
-  title
-  content
-  template {
-    templateName
-  }
-}`;
 
 export const GET_PAGE_TEMPLATE = `
   query GetPageTemplateBySlug($slug: String!) {
-  pageBy(uri: $slug) {
+  nodeByUri(uri: $slug) {
+  __typename
+   ... on Page {
     template {
       templateName
     }
   }
+}
 }`;
 
-export type GetPageBySlugResult = QueryEdgesResult<'nodeByUri', Page>;
+export type GetPageBySlugResult = QueryResult<'nodeByUri', Page>;
