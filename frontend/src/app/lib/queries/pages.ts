@@ -1,4 +1,4 @@
-import { QueryEdgesResult } from '@/types/common';
+import { QueryResult } from '@/types/common';
 import { type Page } from '@/types/pages/page';
 
 export const GET_PAGE_BY_URI = `
@@ -135,4 +135,4 @@ export const GET_PAGE_TEMPLATE = `
 }
 }`;
 
-export type GetPageBySlugResult = QueryEdgesResult<'nodeByUri', Page>;
+export type GetPageBySlugResult = QueryResult<'nodeByUri', Page>;
