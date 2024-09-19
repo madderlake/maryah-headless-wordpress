@@ -59,3 +59,9 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# temp
+/frontend/src/components/templates/Home
+/frontend/src/components/templates/LoadTemplate
+/frontend/src/components/templates/NotFound
+/frontend/src/components/templates/Sidebar

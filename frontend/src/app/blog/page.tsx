@@ -10,7 +10,7 @@ const Blog = async ({ slug = 'blog' }) => {
 
   const { edges } = posts;
   return (
-    <main className="min-h-screen p-24">
+    <main className="min-h-screen p-16 prose md:prose-lg lg:prose-lg max-w-full">
       <h1>{title}</h1>
       <ContentBlock content={content} />
       {edges.map((post: any, index: number) => {
@@ -28,7 +28,7 @@ const Blog = async ({ slug = 'blog' }) => {
         } = post;
         const postCats = categories.nodes.map((cat: any) => cat.name);
         return (
-          <section className={`post-${id} excerpt`} key={id}>
+          <section className={`post-${id} excerpt `} key={id}>
             <h3 className="my-4 font-bold">{title}</h3>
             <ContentBlock content={excerpt} />
             <p className="mt-4">by {author.node.name}</p>

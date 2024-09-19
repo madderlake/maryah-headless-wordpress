@@ -1,47 +1,32 @@
-import React, { useState, useEffect, Fragment, useCallback } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+'use client';
 
-import SidebarContent from '../../layout/Sidebar/Sidebar';
-import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
-import PostComponent from '../Post/Post';
+import ContentBlock from '../../layout/ContentBlock/ContentBlock';
+import { Container } from 'reactstrap';
 import './index.css';
+import { Page } from '@/types/pages/page';
+import { Post } from '@/app/lib/types/posts/post';
+import { Edges } from '@/app/lib/types/common';
+import PostListItem from '@/components/core/Post/PostListItem';
 
-const Blog = (props: any) => {
-  const [appState, setAppState] = useState({
-    loading: true,
-    postList: [],
-  });
-  const type = props.slug === 'blog' ? 'posts' : props.type;
+const Blog = (data: Page & Edges<Post>) => {
+  if (!data) return;
+  const { title, content, slug, edges } = data;
 
-  if (props.data) {
-    const { sidebar_content } = props.data.acf;
-    const pageTitle = props.data.title.rendered;
-    const sidebarContent = sidebar_content ? sidebar_content.component : null;
-    const posts = appState.postList.length > 0 ? [...appState.postList] : [];
-    const showPosts = posts.map((post) => {
-      return <PostComponent data={post} key={`post-${post}`} />;
-    });
-    return (
-      <Fragment>
+  return (
+    <>
+      <article className={`${slug} default-template`}>
         <Container>
-          <h1>{pageTitle}</h1>
-          <ContentBlock
-            content={props.data.content.rendered}
-            title={pageTitle}></ContentBlock>
+          <h1>{title}</h1>
+          <ContentBlock content={content} />
         </Container>
-        <Container>
-          <Row>
-            <Col md={8}>{showPosts}</Col>
-            <Col md={4} className="c-sidebar">
-              <SidebarContent {...sidebarContent} />
-            </Col>
-          </Row>
-        </Container>
-      </Fragment>
-    );
-  }
+      </article>
+      {edges.map((post, index) => {
+        const { node } = post;
 
-  return null;
+        return <PostListItem {...node} key={`post-${index}`} />;
+      })}
+    </>
+  );
 };
 
 export default Blog;
