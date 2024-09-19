@@ -1,5 +1,5 @@
 import { getPageBySlug } from '@/lib/api';
-import SwitchTemplate from '@/components/templates/SwitchTemplate';
+import SwitchTemplate from '@/components/core/SwitchTemplate';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { slug: string } }) {
