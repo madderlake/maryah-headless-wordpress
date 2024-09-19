@@ -7,7 +7,7 @@ type DynamicTagProps = {
 };
 
 const DynamicTag = ({
-  tag = 'h2',
+  tag,
   children,
   className,
 }: DynamicTagProps): JSX.Element => {
