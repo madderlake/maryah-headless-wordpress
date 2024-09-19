@@ -13,7 +13,7 @@ const Section = ({ ...section }: SectionProps) => {
 
   return (
     <section
-      className={classnames(section.sectionClass, bgImgClass, 'mb-16')}
+      className={classnames(section.sectionClass, bgImgClass, 'mb-4')}
       style={bgImg && { backgroundImage: `url(${bgImg.url})` }}>
       <Container fluid={!section.inGrid} className={content?.contentClass}>
         <Title
