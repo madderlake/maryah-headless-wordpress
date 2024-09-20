@@ -61,7 +61,6 @@
 next-env.d.ts
 
 # temp
-/frontend/src/components/templates/Blog
 /frontend/src/components/templates/Home
 /frontend/src/components/templates/LoadTemplate
 /frontend/src/components/templates/NotFound
