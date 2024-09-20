@@ -1,7 +1,10 @@
 import { Col } from 'reactstrap';
 import ContentBlock from '../ContentBlock/ContentBlock';
 import { Section } from '../Section/Section';
-import type { ColProps, FlexColumnsLayout } from '@/components/types';
+import type {
+  ColProps,
+  FlexColumnsLayout,
+} from '@/components/templates/FlexContent/types';
 // import './columns.css';
 
 const Columns = (props: FlexColumnsLayout) => {

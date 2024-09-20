@@ -1,5 +1,5 @@
 import { QueryResult } from '@/types/common';
-import { type Page } from '@/types/pages/page';
+import { type WPPage } from '@/types/pages/wp-page';
 
 export const GET_PAGE_BY_URI = `
 query PageByUri($slug: String!) {
@@ -135,4 +135,4 @@ export const GET_PAGE_TEMPLATE = `
 }
 }`;
 
-export type GetPageBySlugResult = QueryResult<'nodeByUri', Page>;
+export type GetPageBySlugResult = QueryResult<'nodeByUri', WPPage>;
