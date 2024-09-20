@@ -4,10 +4,10 @@ import Tabset from '@/components/layout/Tabset/Tabset';
 import Cardset from '@/components/layout/Cards/Cards';
 import Columns from '@/components/layout/Columns/Columns';
 import { ACFLayout } from './types';
-import { Page } from '@/types/pages/page';
+import { WPPage } from '@/types/pages/wp-page';
 import './index.css';
 
-const FlexContent = (data: Page) => {
+const FlexContent = (data: WPPage) => {
   if (!data) return;
   const { slug, template } = data;
 

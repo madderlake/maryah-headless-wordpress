@@ -12,7 +12,7 @@ import {
 import classnames from 'classnames';
 import { Section } from '../Section/Section';
 import ContentBlock from '../ContentBlock/ContentBlock';
-import type { FlexTabsLayout } from '@/components/types';
+import type { FlexTabsLayout } from '@/components/templates/FlexContent/types';
 import './tabset.css';
 
 const Tabset = (props: FlexTabsLayout): JSX.Element => {

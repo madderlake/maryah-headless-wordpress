@@ -4,7 +4,7 @@ import FeaturedImage from './featuredImage';
 import Revision from './revision';
 import Tag from './tag';
 
-export type Page = {
+export type WPPage = {
   id: string;
   title: string;
   excerpt: string;
@@ -20,9 +20,9 @@ export type Page = {
 };
 
 export type PageBy = {
-  pageBy: Page;
+  pageBy: WPPage;
 };
 
 export type NodeByUri = {
-  nodeByUri: Page;
+  nodeByUri: WPPage;
 };

@@ -3,9 +3,9 @@
 import ContentBlock from '../../layout/ContentBlock/ContentBlock';
 import { Container } from 'reactstrap';
 import './index.css';
-import { Page } from '@/types/pages/page';
+import { WPPage } from '@/types/pages/wp-page';
 
-const Default = (data: Page) => {
+const Default = (data: WPPage) => {
   if (!data) return;
   const { title, content, slug } = data;
 
