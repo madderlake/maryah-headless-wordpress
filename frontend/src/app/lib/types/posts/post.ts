@@ -20,4 +20,4 @@ export type Post = {
   revisions?: Edges<Revision>;
 };
 
-// export default Post;
+export default Post;

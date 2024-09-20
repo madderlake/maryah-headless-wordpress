@@ -3,12 +3,12 @@
 import ContentBlock from '../../layout/ContentBlock/ContentBlock';
 import { Container } from 'reactstrap';
 import './index.css';
-import { Page } from '@/types/pages/page';
+import { WPPage } from '@/types/pages/wp-page';
 import { Post } from '@/app/lib/types/posts/post';
 import { Edges } from '@/app/lib/types/common';
 import PostListItem from '@/components/core/Post/PostListItem';
 
-const Blog = (data: Page & Edges<Post>) => {
+const Blog = (data: WPPage & Edges<Post>) => {
   if (!data) return;
   const { title, content, slug, edges } = data;
 
