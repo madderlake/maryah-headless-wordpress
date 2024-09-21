@@ -1,10 +1,10 @@
 import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
 import type { Post } from '@/app/lib/types/posts/post';
-import './index.css';
+import { notFound } from 'next/navigation';
+// import './index.css';
 
 const Article = (data: Post) => {
-  if (!data) console.log('no data');
-  console.log(data);
+  if (!data) return notFound();
   const { id, title, slug, date, content, author } = data;
 
   return (

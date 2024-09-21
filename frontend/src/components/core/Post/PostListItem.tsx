@@ -1,8 +1,8 @@
-import { Post } from '@/app/lib/types/posts/post';
+import Post from '@/app/lib/types/posts/post';
 import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
-import { Node } from '@/app/lib/types/common';
-const PostListItem = (post: Post) => {
-  const { id, title, excerpt, author, date, categories } = post;
+
+const PostListItem = (data: Post) => {
+  const { id, title, excerpt, author, date, categories } = data;
 
   return (
     <section className={`post-${id} excerpt  max-w-full `} key={id}>
@@ -10,7 +10,12 @@ const PostListItem = (post: Post) => {
       <ContentBlock content={excerpt} />
       <p className="mt-4">by {author.node.name}</p>
       <span>Date: {date} </span>
-      <span>Categories: cats here</span>
+      <span> | </span>
+      <span>Categories:</span>
+
+      {categories?.nodes.map((cat: any) => {
+        return <span className="inline-block mx-2">{cat.name}</span>;
+      })}
     </section>
   );
 };
