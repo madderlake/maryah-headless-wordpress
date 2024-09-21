@@ -10,8 +10,8 @@ import {
   CardHeader,
 } from 'reactstrap';
 import classnames from 'classnames';
-import { Section } from '../Section/Section';
-import ContentBlock from '../ContentBlock/ContentBlock';
+import { Section } from '@/components/layout/Section/Section';
+import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
 import type { FlexTabsLayout } from '@/components/templates/FlexContent/types';
 import './tabset.css';
 
