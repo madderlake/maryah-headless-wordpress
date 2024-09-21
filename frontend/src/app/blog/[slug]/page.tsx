@@ -7,7 +7,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   const data: any = await getPostBySlug(slug);
-  console.log(slug, data);
   if (!data) return notFound();
   const { nodeByUri } = data;
 
