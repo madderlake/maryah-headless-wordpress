@@ -1,19 +1,18 @@
-import { getPageBySlug } from '@/lib/api';
+import { getPostBySlug } from '@/lib/api';
 import LoadTemplate from '@/components/core/LoadTemplate';
+import Article from '@/components/core/Post/Article';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const path = slug.length ? Array.from(slug).join('/') : slug;
 
-  const data: any = await getPageBySlug(path);
+  const data: any = await getPostBySlug(slug);
   if (!data) return notFound();
   const { nodeByUri } = data;
-  const { templateName } = nodeByUri.template;
 
   return (
     <main className="min-h-screen p-24 prose md:prose-lg lg:prose-lg max-w-full">
-      <LoadTemplate tmpl={templateName} data={nodeByUri} />
+      <Article {...nodeByUri} />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 import { Edges, Node } from '../common';
 
 import Author from './author';
-import Category from './category';
+import type { Categories } from './category';
 import FeaturedImage from './featuredImage';
 import Revision from './revision';
 import Tag from './tag';
@@ -14,7 +14,7 @@ export type Post = {
   date: string;
   featuredImage: Node<FeaturedImage>;
   author: Node<Author>;
-  categories?: Edges<Category>;
+  categories?: Categories;
   tags?: Edges<Tag>;
   content?: string;
   revisions?: Edges<Revision>;
