@@ -1,7 +1,11 @@
-import { getPostBySlug } from '@/lib/api';
-import LoadTemplate from '@/components/core/LoadTemplate';
+import { getPostBySlug, getPostSlugs } from '@/lib/api';
 import Article from '@/components/core/Post/Article';
 import { notFound } from 'next/navigation';
+
+export async function generateStaticParams() {
+  const data = await getPostSlugs();
+  return Object.values(data).map((post: any) => Object.values(post));
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;

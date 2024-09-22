@@ -179,3 +179,12 @@ export const GET_POST_AND_MORE_POSTS = (isRevision: boolean) => `
       }
     }
   }`;
+
+export const GET_POST_SLUGS = `
+query GetPostSlugs {
+  posts {
+    nodes {
+      slug
+    }
+  }
+}`;

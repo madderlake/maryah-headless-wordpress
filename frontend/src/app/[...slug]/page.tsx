@@ -1,6 +1,11 @@
-import { getPageBySlug } from '@/lib/api';
+import { getPageBySlug, getPageSlugs } from '@/lib/api';
 import LoadTemplate from '@/components/core/LoadTemplate';
 import { notFound } from 'next/navigation';
+
+export async function generateStaticParams() {
+  const data = await getPageSlugs();
+  return Object.values(data).map((page: any) => Object.values(page));
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
