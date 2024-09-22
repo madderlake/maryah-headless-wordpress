@@ -123,16 +123,24 @@ fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
 
 /* ---------------------------------------------- */
 
-export const GET_PAGE_TEMPLATE = `
-  query GetPageTemplateBySlug($slug: String!) {
-  nodeByUri(uri: $slug) {
-  __typename
-   ... on Page {
-    template {
-      templateName
+// export const GET_PAGE_TEMPLATE = `
+//   query GetPageTemplateBySlug($slug: String!) {
+//   nodeByUri(uri: $slug) {
+//   __typename
+//    ... on Page {
+//     template {
+//       templateName
+//     }
+//   }
+// }
+// }`;
+export const GET_PAGE_SLUGS = `
+query GetPageSlugs {
+  pages {
+    nodes {
+      slug
     }
   }
-}
 }`;
 
 export type GetPageBySlugResult = QueryResult<'nodeByUri', WPPage>;

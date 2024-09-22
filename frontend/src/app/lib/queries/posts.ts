@@ -5,10 +5,10 @@ import { Preview } from '@/types/posts/preview';
 
 export type GetPreviewPostResult = Preview;
 
-export const GET_POST_BY_SLUG = `query GetNodeByUri($slug: String!) {
+export const GET_POST_BY_SLUG = `query GetPostByUri($slug: String!) {
   nodeByUri(uri: $slug) {
     __typename
-  ... on Post {
+    ... on Post {
       id
       date
       slug
@@ -16,26 +16,42 @@ export const GET_POST_BY_SLUG = `query GetNodeByUri($slug: String!) {
       content
       excerpt
       author {
+        ...AuthorToUser
+      }
+      categories {
+        ...PostToCategory
+      }
+    }
+  }
+}
+
+fragment AuthorToUser on NodeWithAuthorToUserConnectionEdge {
+  node {
+    name
+    avatar {
+      url
+    }
+    posts {
+      edges {
         node {
-          name
-          avatar {
-            url
-          }
-          posts {
-            edges {
-              node {
-                title
-                link
-                date
-                excerpt
-              }
-            }
-          }
+          title
+          link
+          date
+          excerpt
         }
       }
     }
   }
+}
+
+fragment PostToCategory on PostToCategoryConnection {
+  nodes {
+    name
+    id
+    uri
+  }
 }`;
+
 export const GET_PREVIEW_POST = `
   query PreviewPost($id: ID!, $idType: PostIdType!) {
     post(id: $id, idType: $idType) {
@@ -179,3 +195,12 @@ export const GET_POST_AND_MORE_POSTS = (isRevision: boolean) => `
       }
     }
   }`;
+
+export const GET_POST_SLUGS = `
+query GetPostSlugs {
+  posts {
+    nodes {
+      slug
+    }
+  }
+}`;

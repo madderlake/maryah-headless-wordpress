@@ -3,7 +3,7 @@ import { Preview } from '@/types/posts/preview';
 
 import {
   GET_PAGE_BY_URI,
-  GET_PAGE_TEMPLATE,
+  GET_PAGE_SLUGS,
   GetPageBySlugResult,
 } from './queries/pages';
 
@@ -12,6 +12,7 @@ import {
   GET_PREVIEW_POST,
   GET_ALL_POSTS_WITH_SLUG,
   GET_LTD_POSTS,
+  GET_POST_SLUGS,
   GET_POST_AND_MORE_POSTS,
   GetPostAndMorePostsResult,
   GetAllPostsWithSlugResult,
@@ -33,13 +34,23 @@ export async function getPostBySlug(slug: string) {
   return data;
 }
 
-export async function getPageTemplateBySlug(slug: string) {
-  const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_TEMPLATE, {
-    variables: { slug },
-  });
-
+export async function getPageSlugs() {
+  const data = await fetchAPI(GET_PAGE_SLUGS);
   return data;
 }
+
+export async function getPostSlugs() {
+  const data = await fetchAPI(GET_POST_SLUGS);
+  return data;
+}
+
+// export async function getPageTemplateBySlug(slug: string) {
+//   const data = await fetchAPI<GetPageBySlugResult>(GET_PAGE_TEMPLATE, {
+//     variables: { slug },
+//   });
+
+//   return data;
+// }
 
 export async function getPreviewPost(
   id: string | string[],
