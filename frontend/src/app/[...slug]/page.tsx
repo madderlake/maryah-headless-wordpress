@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { templateName } = nodeByUri.template;
 
   return (
-    <main className="min-h-screen p-24 prose md:prose-lg lg:prose-lg max-w-full">
+    <main className="min-h-screen p-24 prose md:prose-lg lg:prose-lg md:container mx-auto">
       <LoadTemplate tmpl={templateName} data={nodeByUri} />
     </main>
   );

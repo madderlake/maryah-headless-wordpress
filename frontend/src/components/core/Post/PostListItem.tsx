@@ -1,14 +1,25 @@
 import Post from '@/app/lib/types/posts/post';
 import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const PostListItem = (data: Post) => {
-  const { id, title, excerpt, author, date, categories } = data;
+  const { id, title, slug, excerpt, author, date, featuredImage, categories } =
+    data;
+  const {
+    node: { sourceUrl },
+  } = featuredImage;
 
   return (
     <section className={`post-${id} excerpt  max-w-full `}>
       <h3 className="my-4 font-bold">{title}</h3>
-      <ContentBlock content={excerpt} />
-      <p className="mt-4">by {author.node.name}</p>
+      <div className="flex gap-5">
+        <Image src={sourceUrl} alt={title} width={175} height={175} />
+
+        <ContentBlock content={excerpt} />
+      </div>
+      <Link href={`blog/'${slug}`}>Read More &raquo;</Link>
+      <p className="my-0">by {author.node.name}</p>
       <span>Date: {date} </span>
       <span> | </span>
       <span>Categories:</span>

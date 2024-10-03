@@ -26,7 +26,7 @@ export default async function Header() {
 
   const menuItems = edges.map(({ node }: Node<MenuItem>) => node);
   return (
-    <header className="fixed w-full bg-slate-100">
+    <header className="fixed w-full bg-zinc-100">
       <NavigationMenu menuItems={menuItems} />
     </header>
   );

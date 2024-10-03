@@ -21,6 +21,11 @@ export const GET_POST_BY_SLUG = `query GetPostByUri($slug: String!) {
       categories {
         ...PostToCategory
       }
+        featuredImage {
+      node {
+        sourceUrl
+      }
+    }
     }
   }
 }
