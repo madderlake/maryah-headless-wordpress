@@ -14,6 +14,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const data: any = await getPageBySlug(path);
   if (!data) return notFound();
   const { nodeByUri } = data;
+  if (nodeByUri === null) return notFound();
+
   const { templateName } = nodeByUri.template;
 
   return (

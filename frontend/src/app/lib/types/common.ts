@@ -10,7 +10,13 @@ export type QueryResult<TKey extends string, TData = unknown> = {
   [key in TKey]: TData;
 };
 
-type QueryEdgesKeys = 'posts' | 'pages' | 'pageBy' | 'nodeByUri' | 'categories';
+type QueryEdgesKeys =
+  | 'posts'
+  | 'pages'
+  | 'pageBy'
+  | 'nodeByUri'
+  | 'categories'
+  | 'menus';
 
 export type QueryEdgesResult<
   TKey extends QueryEdgesKeys,

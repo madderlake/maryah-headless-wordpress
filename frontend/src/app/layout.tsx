@@ -1,5 +1,7 @@
 // app/layout.tsx
 import React from 'react';
+import Header from '@/components/core/Header/Header';
+import Footer from '@/components/core/Footer/Footer';
 import './globals.css';
 
 export const metadata = {
@@ -14,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,5 +1,6 @@
 import fetchAPI from './fetchApi';
 import { Preview } from '@/types/posts/preview';
+import { GET_PRIMARY_MENU } from './queries/menus';
 
 import {
   GET_PAGE_BY_URI,
@@ -41,6 +42,11 @@ export async function getPageSlugs() {
 
 export async function getPostSlugs() {
   const data = await fetchAPI(GET_POST_SLUGS);
+  return data;
+}
+
+export async function getPrimaryMenu() {
+  const data = await fetchAPI(GET_PRIMARY_MENU);
   return data;
 }
 
