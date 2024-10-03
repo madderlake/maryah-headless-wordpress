@@ -8,11 +8,10 @@ export const NavigationMenu: React.FC<{ menuItems: MenuItem[] }> = ({
 }) => {
   const [active, setActive] = useState<number>();
   const handleClick = (index: number) => {
-    console.log('clicked');
     setActive(index);
   };
   return (
-    <nav className="p-4 ">
+    <nav className="p-4 md:container mx-auto">
       <ul className="flex gap-20 justify-end">
         {menuItems.map((item, i) => {
           return (
