@@ -1,4 +1,4 @@
-const API_URL = `${process.env.WORDPRESS_API_URL}`;
+const API_URL = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}`;
 
 export const fetchAPI = async <T extends {}>(
   query: string,
