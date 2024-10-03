@@ -14,7 +14,7 @@ const Blog = (data: WPPage & Edges<Post>) => {
 
   return (
     <>
-      <article className={`${slug} default-template`}>
+      <article className={`${slug} blog-template`}>
         <Container>
           <h1>{title}</h1>
           <ContentBlock content={content} />
