@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    WORDPRESS_API_URL: process.env.WORDPRESS_API_URL,
+    NEXT_PUBLIC_WORDPRESS_API_URL: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
   },
   async rewrites() {
     return [
