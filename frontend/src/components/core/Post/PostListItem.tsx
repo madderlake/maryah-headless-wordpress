@@ -6,16 +6,16 @@ import Image from 'next/image';
 const PostListItem = (data: Post) => {
   const { id, title, slug, excerpt, author, date, featuredImage, categories } =
     data;
-  const {
-    node: { sourceUrl },
-  } = featuredImage;
+
+  const sourceUrl = featuredImage?.node?.sourceUrl;
 
   return (
     <section className={`post-${id} excerpt  max-w-full `}>
       <h3 className="my-4 font-bold">{title}</h3>
       <div className="flex gap-5">
-        <Image src={sourceUrl} alt={title} width={175} height={175} />
-
+        {sourceUrl && (
+          <Image src={sourceUrl} alt={title} width={175} height={175} />
+        )}
         <ContentBlock content={excerpt} />
       </div>
       <Link href={`blog/'${slug}`}>Read More &raquo;</Link>
