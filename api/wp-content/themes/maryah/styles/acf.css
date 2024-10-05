@@ -1,0 +1,15 @@
+.col-group > div.acf-input > .acf-fields {
+  display: flex !important;
+}
+
+.dyn-col {
+  flex: auto !important;
+}
+.column-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-group .acf-input .acf-repeater .acf-table .ui-sortable {
+  display: flex !important;
+}

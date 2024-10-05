@@ -1,5 +1,5 @@
 import Post from '@/app/lib/types/posts/post';
-import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
+import ContentBlock from '@/components/core/ContentBlock';
 import Link from 'next/link';
 import Image from 'next/image';
 

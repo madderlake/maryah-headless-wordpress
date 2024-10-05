@@ -1,11 +1,10 @@
-# create a local .env file with the following 4 properties:
+# use a local .env file with the following 4 properties:
 #
 # MYSQL_DATABASE=<something>
 # MYSQL_USER=<something>
 # MYSQL_PASSWORD=<something>
 # MYSQL_ROOT_PASSWORD=<something>
 #
-# version: '3.8'
 
 services:
   database:
@@ -52,13 +51,15 @@ services:
       - 8086:80
     env_file: .env
     environment:
-      WORDPRESS_DB_HOST: database:3306 # use the same name as database service
+      WORDPRESS_DB_HOST: database
       WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
       WORDPRESS_DB_USER: '${MYSQL_USER}'
       WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
     volumes:
       - ./wp-content:/var/www/html/wp-content
-      # - ./:wp-content/:var/www/html/wp-content
+      # - ./localhost-ssl:/etc/apache2/ssl
+      # - ./apache-config/ssl.conf:/etc/apache2/sites-available/ssl.conf
+
     networks:
       - wordpress-network
 

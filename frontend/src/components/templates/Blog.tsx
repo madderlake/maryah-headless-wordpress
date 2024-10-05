@@ -1,8 +1,7 @@
 'use client';
 
-import ContentBlock from '../../layout/ContentBlock/ContentBlock';
+import ContentBlock from '../core/ContentBlock';
 import { Container } from 'reactstrap';
-import './index.css';
 import { WPPage } from '@/types/pages/wp-page';
 import { Post } from '@/app/lib/types/posts/post';
 import { Edges } from '@/app/lib/types/common';

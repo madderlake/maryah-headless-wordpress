@@ -1,7 +1,7 @@
 // app/layout.tsx
 import React from 'react';
 import Header from '@/components/core/Header/Header';
-import Footer from '@/components/core/Footer/Footer';
+import Footer from '@/components/core/Footer';
 import './globals.css';
 
 export const metadata = {
