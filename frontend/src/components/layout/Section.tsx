@@ -1,10 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Container } from 'reactstrap';
-import ContentBlock from '@/components/layout/ContentBlock/ContentBlock';
+import ContentBlock from '@/components/core/ContentBlock';
 import DynamicTag from '@/components/core/DynamicTag';
 import type { SectionProps } from '@/components/templates/FlexContent/types';
-import './section.css';
 
 const Section = ({ ...section }: SectionProps) => {
   const sectionGroup = section.sectionTitle;

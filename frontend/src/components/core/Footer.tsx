@@ -1,7 +1,4 @@
-import React from 'react';
 import { Container } from 'reactstrap';
-
-import './index.css';
 
 const Footer = () => {
   return (

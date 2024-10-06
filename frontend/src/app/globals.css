@@ -33,6 +33,9 @@ body {
   .prose h2 {
     @apply font-normal;
   }
+  .prose .card h3 {
+    @apply mt-0;
+  }
 }
 @layer utilities {
   .text-balance {

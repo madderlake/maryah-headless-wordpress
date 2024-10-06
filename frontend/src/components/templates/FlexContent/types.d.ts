@@ -1,4 +1,4 @@
-type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columns';
+type ACFLayoutType = 'section' | 'tab_set' | 'cards' | 'columnGroup';
 
 export type FlexData = {
   pageTitleGroup: {
@@ -12,7 +12,7 @@ export type ACFLayout = {
   sectionM: SectionProps;
   tabs: FlexTabsLayout['tabs'];
   cards: FlexCardsLayout['cards'];
-  columns: FlexColumnsLayout['columns'];
+  columnGroup: FlexColumnsLayout['columnGroup'];
 };
 export type SectionTitle = {
   sectionTitle: string;
@@ -67,19 +67,19 @@ type FlexCardsLayout = {
 
 export type FlexColumnsLayout = {
   section: SectionProps;
-  columns: [
+  columnGroup: [
     {
-      column: ColProps;
+      columns: ColProps[];
     }
   ];
 };
 
 export type ColProps = {
   width: {
-    desktop: string;
-    tablet: string;
-    mobile: string;
+    small: string;
+    medium: string;
+    large: string;
   };
-  class: string;
+  //class: string;
   content: string;
 };

@@ -1,54 +1,48 @@
 import { QueryResult } from '@/types/common';
 import { type WPPage } from '@/types/pages/wp-page';
-
-export const GET_PAGE_BY_URI = `
-query PageByUri($slug: String!) {
+export const GET_PAGE_BY_URI = `query FlexPageByUri($slug: String!) {
   nodeByUri(uri: $slug) {
-    __typename
     ... on Page {
-      ...PageData
+      id
+      content
+      title
       template {
         templateName
         ... on Template_FlexContent {
           templateName
           flexTemplate {
-            pageTitleGroup {
-              ...PageTitleGroupFragment
-            }
             flexContent {
               ... on FlexTemplateFlexContentSectionLayout {
                 sectionM {
-                  ...SectionFragment
+                  ...SectionMFragment
                 }
               }
               ... on FlexTemplateFlexContentTabSetLayout {
                 sectionM {
-                  ...SectionFragment
+                  ...SectionMFragment
                 }
                 tabs {
-                  tabTitle
-                  tabContent
+                  ...TabsFragment
                 }
               }
               ... on FlexTemplateFlexContentCardsLayout {
                 sectionM {
-                  ...SectionFragment
+                  ...SectionMFragment
                 }
                 cards {
-                  card {
-                    ...CardFragment
-                  }
-                  cardColumns {
-                    ...CardColumnsFragment
-                  }
+                  ...CardsFragment
                 }
               }
               ... on FlexTemplateFlexContentColumnsLayout {
                 sectionM {
-                  ...SectionFragment
+                  ...SectionMFragment
                 }
-                columns {
-                  ...ColumnsFragment
+                columnGroup {
+                  ... on FlexTemplateFlexContentColumnGroupColumnLayout {
+                    columns {
+                      ...ColumnsFragment
+                    }
+                  }
                 }
               }
             }
@@ -59,14 +53,12 @@ query PageByUri($slug: String!) {
   }
 }
 
-fragment PageData on Page {
-  id
-  slug
-  title
-  content
-}
-
-fragment SectionFragment on FlexTemplateFlexContentSectionM {
+fragment SectionMFragment on FlexTemplateFlexContentSectionM {
+  bgImg {
+    node {
+      sourceUrl
+    }
+  }
   content {
     containerized
     contentClass
@@ -74,11 +66,6 @@ fragment SectionFragment on FlexTemplateFlexContentSectionM {
   }
   inGrid
   sectionClass
-  bgImg {
-    node {
-      sourceUrl
-    }
-  }
   sectionTitle {
     sectionTitle
     sectionTitleClass
@@ -86,40 +73,155 @@ fragment SectionFragment on FlexTemplateFlexContentSectionM {
   }
 }
 
-fragment CardFragment on FlexTemplateFlexContentCardsCard {
-  button {
-    buttonLink
-    buttonText
-  }
-  cardContent
-  cardTitle
+fragment TabsFragment on FlexTemplateFlexContentTabs {
+  tabContent
+  tabTitle
 }
 
-fragment CardColumnsFragment on FlexTemplateFlexContentCardsCardColumns {
-  desktop
-  phone
-  tablet
-}
-
-fragment ColumnsFragment on FlexTemplateFlexContentColumns {
-  column {
-    ... on FlexTemplateFlexContentColumnsColumnContentLayout {
-      class
-      content
-      width {
-        desktop
-        mobile
-        tablet
+fragment CardsFragment on FlexTemplateFlexContentCards {
+  card {
+    button {
+      buttonLink
+      buttonText
+    }
+    cardContent
+    cardTitle
+    image {
+      node {
+        sourceUrl
       }
     }
   }
 }
 
-fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
-  pageTitle
-  pageTitleClass
-}
-`;
+
+fragment ColumnsFragment on FlexTemplateFlexContentColumnGroupColumns {
+  content
+  width {
+    large
+    medium
+    small
+  }
+}`;
+// export const GET_PAGE_BY_URI_OLD = `
+// query PageByUri($slug: String!) {
+//   nodeByUri(uri: $slug) {
+//     __typename
+//     ... on Page {
+//       ...PageData
+//       template {
+//         templateName
+//         ... on Template_FlexContent {
+//           templateName
+//           flexTemplate {
+//             pageTitleGroup {
+//               ...PageTitleGroupFragment
+//             }
+//             flexContent {
+//               ... on FlexTemplateFlexContentSectionLayout {
+//                 sectionM {
+//                   ...SectionFragment
+//                 }
+//               }
+//               ... on FlexTemplateFlexContentTabSetLayout {
+//                 sectionM {
+//                   ...SectionFragment
+//                 }
+//                 tabs {
+//                   tabTitle
+//                   tabContent
+//                 }
+//               }
+//               ... on FlexTemplateFlexContentCardsLayout {
+//                 sectionM {
+//                   ...SectionFragment
+//                 }
+//                 cards {
+//                   card {
+//                     ...CardFragment
+//                   }
+//                   cardColumns {
+//                     ...CardColumnsFragment
+//                   }
+//                 }
+//               }
+//               ... on FlexTemplateFlexContentColumnsLayout {
+//                 sectionM {
+//                   ...SectionFragment
+//                 }
+//                 columns {
+//                   ...ColumnsFragment
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// fragment PageData on Page {
+//   id
+//   slug
+//   title
+//   content
+// }
+
+// fragment SectionFragment on FlexTemplateFlexContentSectionM {
+//   content {
+//     containerized
+//     contentClass
+//     sectionContent
+//   }
+//   inGrid
+//   sectionClass
+//   bgImg {
+//     node {
+//       sourceUrl
+//     }
+//   }
+//   sectionTitle {
+//     sectionTitle
+//     sectionTitleClass
+//     sectionTitleTag
+//   }
+// }
+
+// fragment CardFragment on FlexTemplateFlexContentCardsCard {
+//   button {
+//     buttonLink
+//     buttonText
+//   }
+//   cardContent
+//   cardTitle
+// }
+
+// fragment CardColumnsFragment on FlexTemplateFlexContentCardsCardColumns {
+//   desktop
+//   phone
+//   tablet
+// }
+
+// fragment ColumnsFragment on FlexTemplateFlexContentColumns {
+//   column {
+//     ... on FlexTemplateFlexContentColumnsColumnContentLayout {
+//       class
+//       content
+//       width {
+//         desktop
+//         mobile
+//         tablet
+//       }
+//     }
+//   }
+// }
+
+// fragment PageTitleGroupFragment on FlexTemplatePageTitleGroup {
+//   pageTitle
+//   pageTitleClass
+// }
+// `;
 
 /* ---------------------------------------------- */
 

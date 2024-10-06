@@ -1,11 +1,10 @@
 'use client';
-import { Section } from '@/components/layout/Section/Section';
-import Tabset from '@/components/layout/Tabset/Tabset';
-import Cardset from '@/components/layout/Cards/Cards';
-import Columns from '@/components/layout/Columns/Columns';
+import { Section } from '@/components/layout/Section';
+import Tabset from '@/components/layout/Tabset';
+import Cardset from '@/components/layout/Cards';
+import Columns from '@/components/layout/Columns';
 import { ACFLayout } from './types';
 import { WPPage } from '@/types/pages/wp-page';
-import './index.css';
 
 const FlexContent = (data: WPPage) => {
   if (!data) return;
@@ -19,14 +18,14 @@ const FlexContent = (data: WPPage) => {
   const flexContent = flexTemplate?.flexContent as ACFLayout[];
 
   const Layouts = Object.values(flexContent).map((layout, index: number) => {
-    const { sectionM, tabs, cards, columns } = layout;
+    const { sectionM, tabs, cards, columnGroup } = layout;
 
     const cardProps = { section: sectionM, cards };
-    const columnProps = { section: sectionM, columns };
+    const columnProps = { section: sectionM, columnGroup };
     const tabProps = { section: sectionM, tabs };
     return tabs ? (
       <Tabset key={index} {...tabProps} />
-    ) : columns ? (
+    ) : columnGroup ? (
       <Columns {...columnProps} key={index} />
     ) : cards ? (
       <Cardset key={index} {...cardProps} />

@@ -30,3 +30,11 @@ function disable_wp_frontend() {
 }
 add_action('template_redirect', 'disable_wp_frontend');
 
+// Load ACF Css for Admin
+
+function my_acf_admin_head()
+{
+	wp_enqueue_style( 'styles/acf-custom-css', get_template_directory_uri() . '/styles/acf.css', array(), '1.0.0', '' );
+}
+
+add_action('acf/input/admin_head', 'my_acf_admin_head');

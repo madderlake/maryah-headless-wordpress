@@ -17,7 +17,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '8086',
-        // pathname: '/account123/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
