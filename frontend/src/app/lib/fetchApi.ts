@@ -19,7 +19,7 @@ export const fetchAPI = async <T extends {}>(
     method: 'POST',
     headers,
     next: {
-      revalidate: 3600, // 1 hour
+      revalidate: 60, // 1 minute for development
     },
     body: JSON.stringify({
       query,
