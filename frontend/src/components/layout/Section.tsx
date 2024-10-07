@@ -1,6 +1,4 @@
-import React from 'react';
 import classnames from 'classnames';
-import { Container } from 'reactstrap';
 import ContentBlock from '@/components/core/ContentBlock';
 import DynamicTag from '@/components/core/DynamicTag';
 import type { SectionProps } from '@/components/templates/FlexContent/types';
@@ -14,7 +12,7 @@ const Section = ({ ...section }: SectionProps) => {
     <section
       className={classnames(section.sectionClass, bgImgClass, 'mb-4')}
       style={bgImg && { backgroundImage: `url(${bgImg.url})` }}>
-      <Container fluid={!section.inGrid} className={content?.contentClass}>
+      <div className={`container ${content?.contentClass}`}>
         <Title
           title={sectionGroup?.sectionTitle}
           titleClass={sectionGroup?.sectionTitleClass}
@@ -24,7 +22,7 @@ const Section = ({ ...section }: SectionProps) => {
           className={content?.contentClass}
           content={content?.sectionContent}
         />
-      </Container>
+      </div>
       {children}
     </section>
   );
