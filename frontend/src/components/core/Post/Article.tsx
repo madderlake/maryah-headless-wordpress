@@ -2,6 +2,7 @@ import ContentBlock from '@/components/core/ContentBlock';
 import type { Post } from '@/app/lib/types/posts/post';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import type Category from '@/app/lib/types/posts/category';
 
 const Article = (data: Post) => {
   if (!data) return notFound();
@@ -15,7 +16,13 @@ const Article = (data: Post) => {
       <h2 className="mb-8">{title}</h2>
       <div className="flex gap-5">
         {sourceUrl && (
-          <Image src={sourceUrl} alt={title} width={300} height={400} />
+          <Image
+            src={sourceUrl}
+            alt={title}
+            width={300}
+            height={300}
+            className="inline h-auto"
+          />
         )}
         <ContentBlock content={content} />
       </div>
@@ -26,13 +33,11 @@ const Article = (data: Post) => {
         <span> | </span>
         <span>
           Categories:
-          {categories?.nodes.map((cat: any) => {
-            return (
-              <span className="inline-block mx-2" key={cat.categoryId}>
-                {cat.name}
-              </span>
-            );
-          })}
+          {categories?.nodes.map((cat: Category) => (
+            <span className="inline-block mx-2" key={cat.id}>
+              {cat.name}
+            </span>
+          ))}
         </span>
       </div>
     </article>
