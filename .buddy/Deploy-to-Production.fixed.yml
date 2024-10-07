@@ -17,5 +17,4 @@
     archive: true
     compress: true
     deployment_excludes:
-    - ""
     - ".gitignore"
