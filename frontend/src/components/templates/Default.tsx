@@ -1,7 +1,4 @@
-'use client';
-
 import ContentBlock from '../core/ContentBlock';
-import { Container } from 'reactstrap';
 import { WPPage } from '@/types/pages/wp-page';
 
 const Default = (data: WPPage) => {
@@ -11,10 +8,10 @@ const Default = (data: WPPage) => {
   return (
     <section>
       <article className={`${slug} default-template`}>
-        <Container>
+        <div>
           <h1>{title}</h1>
           <ContentBlock content={content} />
-        </Container>
+        </div>
       </article>
     </section>
   );

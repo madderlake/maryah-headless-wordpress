@@ -1,7 +1,4 @@
-// 'use client';
-
 import ContentBlock from '../core/ContentBlock';
-import { Container } from 'reactstrap';
 import { WPPage } from '@/types/pages/wp-page';
 import { Post } from '@/app/lib/types/posts/post';
 import { Edges } from '@/app/lib/types/common';
@@ -13,11 +10,11 @@ const Blog = (data: WPPage & Edges<Post>) => {
 
   return (
     <>
-      <article className={`${slug} blog-template`}>
-        <Container>
+      <article className={`${slug} container`}>
+        <div>
           <h1>{title}</h1>
           <ContentBlock content={content} />
-        </Container>
+        </div>
       </article>
       {edges.map((post, index) => {
         const { node } = post;
