@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import ContentBlock from '../core/ContentBlock';
 import { Container } from 'reactstrap';

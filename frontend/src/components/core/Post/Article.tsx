@@ -20,14 +20,18 @@ const Article = (data: Post) => {
         <ContentBlock content={content} />
       </div>
       <div className="row  post-footer ">
-        <span>{author.node.name}</span>
+        <span>{author?.node?.name}</span>
         <span> | </span>
         <span>{date}</span>
         <span> | </span>
         <span>
           Categories:
           {categories?.nodes.map((cat: any) => {
-            return <span className="inline-block mx-2">{cat.name}</span>;
+            return (
+              <span className="inline-block mx-2" key={cat.categoryId}>
+                {cat.name}
+              </span>
+            );
           })}
         </span>
       </div>
