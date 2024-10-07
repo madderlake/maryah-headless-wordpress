@@ -11,6 +11,7 @@ export type Post = {
   title: string;
   excerpt: string;
   slug: string;
+  uri: string;
   date: string;
   featuredImage: Node<FeaturedImage>;
   author: Node<Author>;

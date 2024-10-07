@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const PostListItem = (data: Post) => {
-  const { id, title, slug, excerpt, author, date, featuredImage, categories } =
+  const { id, title, uri, excerpt, author, date, featuredImage, categories } =
     data;
 
   const sourceUrl = featuredImage?.node?.sourceUrl;
@@ -18,7 +18,7 @@ const PostListItem = (data: Post) => {
         )}
         <ContentBlock content={excerpt} />
       </div>
-      <Link href={`blog/'${slug}`}>Read More &raquo;</Link>
+      <Link href={`${uri}`}>Read More &raquo;</Link>
       <p className="my-0">by {author.node.name}</p>
       <span>Date: {date} </span>
       <span> | </span>
