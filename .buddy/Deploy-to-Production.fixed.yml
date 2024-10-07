@@ -4,6 +4,10 @@
     refs:
     - "refs/heads/main"
   fail_on_prepare_env_warning: true
+  trigger_conditions:
+  - trigger_condition: "ON_CHANGE_AT_PATH"
+    trigger_condition_paths:
+    - "api/wp-content"
   actions:
   - action: "Rsync to 217.196.54.213"
     type: "RSYNC"
