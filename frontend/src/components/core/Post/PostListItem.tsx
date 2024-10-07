@@ -2,11 +2,11 @@ import Post from '@/app/lib/types/posts/post';
 import ContentBlock from '@/components/core/ContentBlock';
 import Link from 'next/link';
 import Image from 'next/image';
+import Category from '@/app/lib/types/posts/category';
 
 const PostListItem = (data: Post) => {
   const { id, title, slug, excerpt, author, date, featuredImage, categories } =
     data;
-
   const sourceUrl = featuredImage?.node?.sourceUrl;
 
   return (
@@ -24,8 +24,8 @@ const PostListItem = (data: Post) => {
       <span> | </span>
       <span>Categories:</span>
 
-      {categories?.nodes.map((cat: any) => (
-        <span className="inline-block mx-2" key={cat.categoryId}>
+      {categories?.nodes.map((cat: Category) => (
+        <span className="inline-block mx-2" key={cat.id}>
           {cat.name}
         </span>
       ))}
