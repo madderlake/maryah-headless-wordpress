@@ -1,6 +1,7 @@
 import { QueryResult } from '@/types/common';
 import { type WPPage } from '@/types/pages/wp-page';
-export const GET_PAGE_BY_URI = `query FlexPageByUri($slug: String!) {
+export const GET_PAGE_BY_URI = `
+query FlexPageByUri($slug: String!) {
   nodeByUri(uri: $slug) {
     ... on Page {
       id
@@ -93,7 +94,6 @@ fragment CardsFragment on FlexTemplateFlexContentCards {
     }
   }
 }
-
 
 fragment ColumnsFragment on FlexTemplateFlexContentColumnGroupColumns {
   content
