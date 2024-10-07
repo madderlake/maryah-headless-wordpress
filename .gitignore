@@ -16,6 +16,8 @@
 # Uploads
 /api/wp-content/upgrade*/
 
+# VS Code
+.vscode
 # Log files
 *.log
 
