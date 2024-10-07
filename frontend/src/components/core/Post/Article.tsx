@@ -27,7 +27,11 @@ const Article = (data: Post) => {
         <span>
           Categories:
           {categories?.nodes.map((cat: any) => {
-            return <span className="inline-block mx-2">{cat.name}</span>;
+            return (
+              <span className="inline-block mx-2" key={cat.categoryId}>
+                {cat.name}
+              </span>
+            );
           })}
         </span>
       </div>
