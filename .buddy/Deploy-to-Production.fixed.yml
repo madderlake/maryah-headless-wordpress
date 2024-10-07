@@ -7,7 +7,7 @@
   actions:
   - action: "Rsync to 217.196.54.213"
     type: "RSYNC"
-    local_path: "api"
+    local_path: "api/wp-content"
     remote_path: "domains/wp-api.maryahayne.com/public_html/"
     login: "u950829820"
     host: "217.196.54.213"
