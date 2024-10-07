@@ -15,6 +15,7 @@ export const GET_POST_BY_SLUG = `query GetPostByUri($slug: String!) {
       title
       content
       excerpt
+      uri
       author {
         ...AuthorToUser
       }
@@ -96,6 +97,7 @@ fragment RootQueryToPostConnectionEdgeFragment on RootQueryToPostConnectionEdge 
     title
     excerpt(format: RENDERED)
     slug
+    uri
     date
     featuredImage {
       node {
