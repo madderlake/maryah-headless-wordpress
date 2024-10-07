@@ -16,5 +16,7 @@
     authentication_mode: "ENV_KEY"
     archive: true
     compress: true
-    deployment_excludes:
-    - ".gitignore"
+    trigger_conditions:
+    - trigger_condition: "ON_CHANGE_AT_PATH"
+      trigger_condition_paths:
+      - "api/wp-content"
