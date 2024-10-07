@@ -23,7 +23,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'wp-api.maryahayne.com',
         port: '',
-        pathname: '/graphql',
       },
     ],
   },
