@@ -1,5 +1,5 @@
 import { getPageBySlug, getPageSlugs } from '@/lib/api';
-import LoadTemplate from '@/components/core/LoadTemplate';
+import LoadTemplate from '@/components/templates/LoadTemplate';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -13,6 +13,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const data: any = await getPageBySlug(path);
   if (!data) return notFound();
+
   const { nodeByUri } = data;
   if (nodeByUri === null) return notFound();
 

@@ -16,11 +16,9 @@ const Blog = (data: WPPage & Edges<Post>) => {
           <ContentBlock content={content} />
         </div>
       </article>
-      {edges.map((post, index) => {
-        const { node } = post;
-
-        return <PostListItem {...node} key={`post-${index}`} />;
-      })}
+      {edges.map(({ node }) => (
+        <PostListItem {...node} key={`post-${node.id}`} />
+      ))}
     </>
   );
 };

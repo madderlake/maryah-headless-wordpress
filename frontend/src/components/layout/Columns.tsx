@@ -27,7 +27,6 @@ const Columns = (props: FlexColumnsLayout) => {
   const columnsArray = Object.assign({}, ...Object.values(columns));
   const allColumns = Object.values(columnsArray).map((col, index) => {
     const { content, width } = col as ColProps;
-    console.log(content, width);
     return <Column width={width} content={content} key={index} />;
   });
 
