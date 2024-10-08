@@ -1,5 +1,4 @@
 <?php
-// define('WP_URL', 'http://localhost:8086');
 // Menus
 require_once('inc/menus.php');
 // CORS
