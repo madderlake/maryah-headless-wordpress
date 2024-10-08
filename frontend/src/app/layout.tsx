@@ -1,6 +1,6 @@
 // app/layout.tsx
 import React from 'react';
-import Header from '@/components/core/Header/Header';
+import Header from '@/components/core/Header';
 import Footer from '@/components/core/Footer';
 import './globals.css';
 

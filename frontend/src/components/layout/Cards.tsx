@@ -35,7 +35,7 @@ const Cardset = (props: FlexCardsLayout) => {
   return (
     <Section {...section}>
       <div
-        className={`grid gap-4`}
+        className={`container md:grid gap-4`}
         style={{ gridTemplateColumns: `repeat(${numCards}, 1fr)` }}>
         {Cards}
       </div>
