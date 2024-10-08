@@ -24,7 +24,7 @@ export const GET_POST_BY_SLUG = `query GetPostByUri($slug: String!) {
       }
         featuredImage {
       node {
-        sourceUrl
+        sourceUrl(size: LARGE)
       }
     }
     }
