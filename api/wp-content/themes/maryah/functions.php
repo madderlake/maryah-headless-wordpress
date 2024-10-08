@@ -7,7 +7,14 @@ require_once('inc/cors.php');
 // Custom Post Types
 require_once('inc/custom-post-types/portfolio.php');
 
+// Disable Gutenberg on specific templates and pages
 require_once('inc/disable-editor.php');
+
+//Disable Theme Editor
+ function disable_theme_editor_action() {
+      define('DISALLOW_FILE_EDIT', TRUE);
+    }
+    add_action('admin_init','disable_theme_editor_action');
 
 // Enqueue WordPress REST API
 function maryah_headless_theme_setup() {
