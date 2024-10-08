@@ -1,13 +1,13 @@
 import ContentBlock from '../core/ContentBlock';
 import { WPPage } from '@/types/pages/wp-page';
-import { Post } from '@/app/lib/types/posts/post';
-import { Edges } from '@/app/lib/types/common';
 import PostListItem from '@/components/core/Post/PostListItem';
+import { getAllPostsForHome } from '@/app/lib/api';
 
-const Blog = (data: WPPage & Edges<Post>) => {
+const Blog = async (data: WPPage) => {
   if (!data) return;
-  const { title, content, slug, edges } = data;
-
+  const { title, content, slug } = data;
+  const postData = await getAllPostsForHome(12, false);
+  const { edges } = postData;
   return (
     <>
       <article className={`${slug} container`}>

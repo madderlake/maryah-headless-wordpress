@@ -14,8 +14,7 @@ const LoadTemplate = async ({ tmpl, data }: { tmpl: string; data: WPPage }) => {
       return <FlexContent {...data} />;
 
     case 'Blog':
-      const postData = await getAllPostsForHome(12, false);
-      return <Blog {...data} {...postData} />;
+      return <Blog {...data} />;
 
     default:
       return <Default {...data} />;

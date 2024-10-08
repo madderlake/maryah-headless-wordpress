@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getPageBySlug, getPageSlugs } from '@/lib/api';
 import LoadTemplate from '@/components/templates/LoadTemplate';
 import { notFound } from 'next/navigation';
