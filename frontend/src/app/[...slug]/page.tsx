@@ -1,6 +1,7 @@
 import { getPageBySlug, getPageSlugs } from '@/lib/api';
 import LoadTemplate from '@/components/templates/LoadTemplate';
 import { notFound } from 'next/navigation';
+import { pathname } from 'next-extra/pathname';
 
 export async function generateStaticParams() {
   const data = await getPageSlugs();
@@ -8,8 +9,10 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const path = slug.length ? Array.from(slug).join('/') : slug;
+  // const { slug } = params;
+  // const path = slug.length ? Array.from(slug).join('/') : slug;
+
+  const path = pathname();
 
   const data: any = await getPageBySlug(path);
   if (!data) return notFound();
