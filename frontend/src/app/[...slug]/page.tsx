@@ -9,10 +9,8 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  // const { slug } = params;
-  // const path = slug.length ? Array.from(slug).join('/') : slug;
-
-  const path = pathname();
+  const { slug } = params;
+  const path = slug.length ? pathname() : slug;
 
   const data: any = await getPageBySlug(path);
   if (!data) return notFound();
